@@ -30,11 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="logo">GameGrid</div>
             <button id="menu-toggle" class="menu-btn">☰</button>
             <ul class="nav-links">
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/Games/games.html">Games</a></li>
-                <li><a href="/Art/art.html">Art</a></li>
-                <li><a href="/Creators/creators.html">Creators</a></li>
-                <li><a href="/About/about.html">About</a></li>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./Games/games.html">Games</a></li>
+                <li><a href="./Art/art.html">Art</a></li>
+                <li><a href="./Creators/creators.html">Creators</a></li>
+                <li><a href="./About/about.html">About</a></li>
             </ul>
         </nav>
     `;
