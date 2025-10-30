@@ -7,7 +7,7 @@
         <meta name="author" content="Amina Moosa">
         <meta name="description" content="Home Page of the website GameGrid">
 
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="Styles/main.css">
         <script src="/Scripts/nav.js"></script>
     </head>
 
@@ -30,11 +30,49 @@
                 <section class="featuring Project-Container h-feed">
 
                     <h2 class="p-name">Featured projects</h2>
-                    <div class="project-card h-entry">
-                        <h3 class="p-name">Trials & Tribulations</h3>
-                        <p class="p-summary">
-                            
-                        </p>
+
+                    <div class="carousel-container">
+                        <button class="carousel-btn prev">&#10094;</button>
+
+                        <div class="carousel-track">
+                            <!-- SLIDE 1 -->
+                            <div class="project-card h-entry carousel-slide">
+                                <figure class="project-img">
+                                    <img src="" class="responsive-img" alt="Trials & Tribulations Screenshot">
+                                    <figcaption>Trials & Tribulations</figcaption>
+                                </figure>
+                                <h3 class="p-name">Trials & Tribulations</h3>
+                                <p class="p-summary">Ever wanted to make money and test your immune system?</p>
+                                <div class="game-link"><a class="itch-btn" href="" target="_blank">Play on Itch.io</a></div>
+                                <div class="creator-link"><a class="itch-btn" href="" target="_blank">Nhlanzeko Mwandla</a></div>
+                            </div>
+
+                            <!-- SLIDE 2 -->
+                            <div class="project-card h-entry carousel-slide">
+                                <figure class="project-img">
+                                    <img src="" class="responsive-img" alt="A Frog's Tale Screenshot">
+                                    <figcaption>A Frog’s Tale</figcaption>
+                                </figure>
+                                <h3 class="p-name">A Frog's Tale</h3>
+                                <p class="p-summary">Help Frogerick defeat a great evil and free his people.</p>
+                                <div class="game-link"><a class="itch-btn" href="" target="_blank">Play on Itch.io</a></div>
+                                <div class="creator-link"><a class="itch-btn" href="" target="_blank">Nhlanzeko Mwandla</a></div>
+                            </div>
+
+                            <!-- SLIDE 3 -->
+                            <div class="project-card h-entry carousel-slide">
+                                <figure class="project-img">
+                                    <img src="" class="responsive-img" alt="Project Screenshot">
+                                    <figcaption>Another Indie Game</figcaption>
+                                </figure>
+                                <h3 class="p-name">Another Frog Game</h3>
+                                <p class="p-summary">Jump, explore, and uncover mysteries in this indie gem.</p>
+                                <div class="game-link"><a class="itch-btn" href="" target="_blank">Play on Itch.io</a></div>
+                                <div class="creator-link"><a class="itch-btn" href="" target="_blank">Nhlanzeko Mwandla</a></div>
+                            </div>
+                        </div>
+
+                        <button class="carousel-btn next">&#10095;</button>
                     </div>
 
                 </section>
@@ -44,7 +82,7 @@
 
         <footer>
             <p class="footer">
-                <a href="mailto:moosa.amina00@gmail.com">Email</a>
+                <a href="mailto:moosa.amina00@gmail.com" target="_blank">Email</a>
                 <a href="https://github.com/Wandering-Wind" target="_blank">GitHub</a>
                 <a href="https://wandering-wind.itch.io/" target="_blank">Itch.io</a>
             </p>
