@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="Styles/main.css">
         <link rel="stylesheet" href="index.css">
         <script src="./Scripts/nav.js" defer></script>
+        <script src="index.js" defer></script>
     </head>
 
     <body>
@@ -35,7 +36,7 @@
                     <div class="carousel-container">
                         <button class="carousel-btn prev">&#10094;</button>
 
-                        <div class="carousel-track">
+                        <div class="carousel-track center-mode">
                             <!-- SLIDE 1 -->
                             <div class="project-card h-entry carousel-slide">
                                 <figure class="project-img">
@@ -73,7 +74,7 @@
                                 <div class="game-link"><a class="itch-btn" href="https://ashtanton.itch.io/psychodelics-tcgj-2025" target="_blank">Play on Itch.io</a></div>
                                 <div class="creator-link"><a class="itch-btn" href="" >Cool Kids Next Door</a></div>
                             </div>
-                        </div>
+                        
 
                         <!-- SLIDE 4 -->
                             <div class="project-card h-entry carousel-slide">
@@ -86,7 +87,7 @@
                                 <div class="game-link"><a class="itch-btn" href="" target="_blank">Play on Itch.io</a></div>
                                 <div class="creator-link"><a class="itch-btn" href="">Safe Dollar Studios</a></div>
                             </div>
-                        </div>
+                        
 
                         <!-- SLIDE 5 -->
                             <div class="project-card h-entry carousel-slide">
@@ -99,7 +100,7 @@
                                 <div class="game-link"><a class="itch-btn" href="" target="_blank">Play on Itch.io</a></div>
                                 <div class="creator-link"><a class="itch-btn" href="">Timothy Chilezi</a></div>
                             </div>
-                        </div>
+                        
 
                         <!-- SLIDE 6 -->
                             <div class="project-card h-entry carousel-slide">
@@ -117,6 +118,17 @@
                         <button class="carousel-btn next">&#10095;</button>
                     </div>
 
+                </section>
+
+                <section class="API h-feed">
+                        <h2>Game Search</h2>
+
+                        <div class="search-box">
+                            <input id="searchInput" type="text" placeholder="Search games...">
+                            <button id="searchBtn">Search</button>
+                        </div>
+
+                        <div id="rawg-games" class="rawg-grid"></div>
                 </section>
 
             </section>

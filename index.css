@@ -1,3 +1,172 @@
+/* === SEARCH HUD BAR === */
+.search-box {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.search-box input {
+    flex: 1;
+    max-width: 400px;
+    padding: 0.7rem 1rem;
+
+    background: rgba(0, 25, 55, 0.35);
+    border: 1px solid rgba(0, 200, 255, 0.6);
+    border-top: 2px solid rgba(0, 255, 255, 0.7);
+
+    color: var(--neon-cyan);
+    border-radius: 10px;
+    backdrop-filter: blur(12px) saturate(180%);
+    font-family: "Orbitron", sans-serif;
+    text-shadow: 0 0 6px var(--neon-cyan);
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.search-box input::placeholder {
+    color: rgba(0, 255, 255, 0.6);
+}
+
+.search-box input:focus {
+    box-shadow: 0 0 12px var(--neon-cyan), 0 0 30px var(--neon-purple);
+    transform: scale(1.02);
+}
+
+.search-box button {
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    background: transparent;
+    border: 1px solid var(--neon-purple);
+    color: var(--neon-purple);
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Orbitron", sans-serif;
+    text-shadow: 0 0 6px var(--neon-purple);
+    box-shadow: 0 0 6px var(--neon-purple);
+    transition: 0.25s ease;
+}
+
+.search-box button:hover {
+    background: var(--neon-purple);
+    color: #02030a;
+    box-shadow: 0 0 18px var(--neon-purple);
+}
+
+
+/* === RAWG GAME GRID === */
+.rawg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* === RAWG GAME CARD (HUD Style) === */
+.rawg-card {
+    background: rgba(0, 25, 55, 0.35);
+    border: 1px solid rgba(0, 200, 255, 0.6);
+    border-top: 2px solid rgba(0, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 1.2rem;
+    color: #e5eaff;
+
+    backdrop-filter: blur(12px) saturate(180%);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.15);
+
+    transition: 0.25s ease;
+    text-align: center;
+}
+
+.rawg-card:hover {
+    box-shadow: 0 0 16px var(--neon-blue), 0 0 40px var(--neon-purple);
+    transform: translateY(-4px) scale(1.03);
+}
+
+/* Game Image */
+.rawg-card img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--neon-cyan);
+    margin-bottom: 0.6rem;
+}
+
+/* Game Title */
+.rawg-card h3 {
+    font-size: 1.2rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px var(--neon-cyan);
+    margin: 0.4rem 0 0.6rem;
+}
+
+/* META TEXT */
+.rawg-meta {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    line-height: 1.4;
+}
+
+/* Link inherits .itch-btn look */
+.rawg-card .itch-btn {
+    margin-top: 1rem;
+}
+
+
+/* === CAROUSEL (keep spacing but enhance glow buttons) === */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 4rem;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s ease;
+}
+
+.carousel-slide {
+    flex: 0 0 60%;
+    margin: 0 2rem;
+    opacity: 0.5;
+    transform: scale(0.85);
+    transition: 0.4s ease;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* HUD glowing arrows */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 25, 55, 0.8);
+    border: 1px solid var(--neon-green);
+    padding: 0.7rem 1rem;
+    font-size: 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--neon-green);
+    text-shadow: 0 0 6px var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-green);
+    transition: 0.25s ease;
+    z-index: 5;
+}
+
+.carousel-btn:hover {
+    background: var(--neon-green);
+    color: #02030a;
+    box-shadow: 0 0 18px var(--neon-green), 0 0 28px var(--neon-magenta);
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/*
 .carousel-container {
     position: relative;
     overflow: hidden;
@@ -8,15 +177,53 @@
 
 .carousel-track {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.6s ease-in-out;
 }
 
 .carousel-slide {
     min-width: 100%;
-    padding: 1rem;
+    padding: 1.5rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Optional polish 
+.carousel-container:hover .carousel-btn {
+    opacity: 1;
+}
+.carousel-btn {
+    opacity: 0.6;
+}
+.carousel-btn:hover {
+    opacity: 1;
+}
+*/
+
+
+/*
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 4rem;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -38,4 +245,4 @@
 
 .prev { left: 10px; }
 .next { right: 10px; }
-
+*/

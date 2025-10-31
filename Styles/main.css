@@ -84,7 +84,7 @@ main {
 
 /* PROJECT GRID LAYOUT */
 /* Page Title */
-h1.p-name {
+h1.p-name, h2 {
     font-size: 3rem;
     text-align: center;
     color: var(--neon-cyan);
@@ -122,8 +122,6 @@ article.e-content {
         inset 0 0 20px rgba(0, 255, 255, 0.15);
 
     transition: 0.25s ease;
-
-    
 }
 
 
