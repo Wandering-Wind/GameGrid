@@ -3,6 +3,7 @@
     --neon-purple: #7000c0;
     --neon-green: #00ff9d;
     --neon-blue: #0237b4;
+    --neon-magenta: #dd00ff;
 
     /*--neon-cyan: #00eaff;
     --neon-purple: #8a00ff;
@@ -173,7 +174,7 @@ article.e-content {
 }
 
 /* Tags */
-.project-tags {
+.project-tags{
     list-style: none;
     padding: 0;
     margin: 0.8rem 0;
@@ -182,12 +183,33 @@ article.e-content {
     gap: 0.6rem;
 }
 
-.tag {
+/*.tag, .show-all {
     border: 1px solid var(--neon-purple);
     padding: 0.2rem 0.6rem;
     font-size: 0.85rem;
     border-radius: 8px;
     text-shadow: 0 0 6px var(--neon-purple);
+}*/
+
+/* Tag pill style */
+.tag,
+.show-all {
+    cursor: pointer;
+    border: 1px solid var(--neon-magenta);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    text-shadow: 0 0 6px var(--neon-magenta);
+    color: var(--neon-magenta);
+    background: transparent;
+    transition: 0.2s ease;
+}
+
+/* Hover glow like tags */
+.tag:hover,
+.show-all:hover {
+    background: rgba(112, 0, 192, 0.25);
+    box-shadow: 0 0 10px var(--neon-purple);
 }
 
 /* Buttons */
