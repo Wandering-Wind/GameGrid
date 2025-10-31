@@ -1,57 +1,55 @@
-.carousel-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto 4rem;
+:root {
+    --neon-cyan: #0088ff;
+    --neon-purple: #7000c0;
+    --neon-green: #00ff9d;
+    --neon-blue: #0237b4;
+
+    /*--neon-cyan: #00eaff;
+    --neon-purple: #8a00ff;
+    --neon-green: #00ff9d;*/
 }
 
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+/* === Futuristic HUD Background === */
+/*=== So for the background style, scanlines + a subtle kind of grid + neon glow misty thing===*/
+body {
+    background: radial-gradient(circle at 30% 20%, rgba(0, 136, 255, 0.15), transparent 60%),
+                radial-gradient(circle at 70% 80%, rgba(112, 0, 192, 0.15), transparent 60%),
+                #02030a;
+    background-size: cover;
+    backdrop-filter: blur(2px);
+    color: #e5eaff;
+    font-family: "Orbitron", "Audiowide", sans-serif;
+    overflow-x: hidden;
 }
 
-.carousel-slide {
-    min-width: 100%;
-    padding: 1rem;
-    box-sizing: border-box;
+/* Scanline Effect */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 255, 255, 0.02),
+        rgba(0, 255, 255, 0.02) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    z-index: -1;
 }
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.6);
-    border: none;
-    padding: 0.8rem 1.2rem;
-    font-size: 2rem;
-    z-index: 5;
-    transition: 0.3s;
-    border-radius: 8px;
-    backdrop-filter: blur(5px);
-}
-
-.carousel-btn:hover {
-    background: rgba(0,255,180,0.5);
-}
-
-.prev { left: 10px; }
-.next { right: 10px; }
-
 
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 2px solid var(--accent, #00ffc8);
+    border-bottom: 2px solid var(--accent, #0088ff);
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--accent, #00ffc8);
+    color: var(--accent, #0088ff);
 }
 
 .nav-links {
@@ -61,13 +59,13 @@
 }
 
 .nav-links a {
-    color: var(--accent, #00ffc8);
+    color: var(--accent, #0088ff);
     text-decoration: none;
     transition: 0.2s;
 }
 
 .nav-links a:hover {
-    text-shadow: 0 0 8px var(--accent, #00ffc8);
+    text-shadow: 0 0 8px var(--accent, #0088ff);
 }
 
 /* mobile */
@@ -79,7 +77,152 @@
     color: var(--accent, #00ffc8);
 }
 
-@media(max-width: 740px) {
+main {
+    padding: 4rem 2rem;
+}
+
+/* PROJECT GRID LAYOUT */
+/* Page Title */
+h1.p-name {
+    font-size: 3rem;
+    text-align: center;
+    color: var(--neon-cyan);
+    margin-bottom: 3rem;
+    text-shadow: 0 0 12px var(--neon-cyan);
+}
+
+/* Project Grid */
+.Project-Container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+article.e-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    /*grid-template-columns: repeat(3, 1fr);*/
+    gap: 2.5rem;
+}
+
+/* Card */
+.project-card {
+    background: rgba(0, 25, 55, 0.35);
+    border: 1px solid rgba(0, 200, 255, 0.6);
+    border-top: 2px solid rgba(0, 255, 255, 0.7);
+    border-radius: 10px;
+    
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+
+    padding: 1.5rem;
+    position: relative;
+    box-shadow:
+        0 0 12px rgba(0, 255, 255, 0.4),
+        inset 0 0 20px rgba(0, 255, 255, 0.15);
+
+    transition: 0.25s ease;
+
+    
+}
+
+
+
+/* Hover glow HUD feel */
+.project-card:hover {
+    box-shadow: 0 0 16px var(--neon-blue), 0 0 40px var(--neon-purple);
+    transform: translateY(-4px) scale(1.02);
+}
+
+/* Hover boost glow 
+.project-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.7),
+        0 0 40px rgba(112, 0, 192, 0.6);
+}*/
+
+/* Project image */
+.project-img {
+    text-align: center;
+}
+.project-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--neon-cyan);
+}
+
+/* Card text/info */
+.project-title {
+    font-size: 1.5rem;
+    margin: 0.8rem 0;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.project-summary {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Creator link */
+.project-creator a {
+    color: var(--neon-green);
+    text-shadow: 0 0 6px var(--neon-green);
+}
+
+/* Tags */
+.project-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.tag {
+    border: 1px solid var(--neon-purple);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    text-shadow: 0 0 6px var(--neon-purple);
+}
+
+/* Buttons */
+.itch-btn {
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    margin-top: 0.8rem;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    text-decoration: none;
+    border-radius: 8px;
+    text-shadow: 0 0 8px var(--neon-cyan);
+    transition: 0.25s;
+}
+
+.itch-btn:hover {
+    background: var(--neon-cyan);
+    color: black;
+    box-shadow: 0 0 14px var(--neon-cyan);
+}
+
+/* Tablet: 2 cards */
+@media (max-width: 768px) {
+    /*article.e-content {
+        grid-template-columns: repeat(2, 1fr);
+    }*/
+}
+
+/* Mobile: 1 card */
+@media(max-width: 480px) {
+
+    /*article.e-content {
+        grid-template-columns: repeat(1, 1fr);
+    }*/
+
     .menu-btn {
         display: block;
     }
@@ -98,3 +241,4 @@
         display: flex;
     }
 }
+
