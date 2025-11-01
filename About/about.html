@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About</title>
         <script src="../Scripts/nav.js" defer></script>
+        <script src="about.js" defer></script>
         <link rel="stylesheet" href="../Styles/main.css">
         <link rel="stylesheet" href="about.css">
     </head>
@@ -46,7 +47,7 @@
                         <div class="contact-wrapper project-card">
                             <h2>Contact Me</h2>
 
-                            <form class="contact-form" action="#" method="POST">
+                            <form class="contact-form" id="contactForm" action="https://formspree.io/f/mgvppbnd" method="POST">
                                 <div class="form-group">
                                     <label for="name">Name *</label>
                                     <input type="text" id="name" name="name" required placeholder="Enter your name">
@@ -58,8 +59,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="phone">Phone (optional)</label>
-                                    <input type="tel" id="phone" name="phone" placeholder="+27 082 000 0000">
+                                    <label for="phone">Phone *</label>
+                                    <input type="tel" id="phone" name="phone" required placeholder="+27 -- --- ----">
                                 </div>
 
                                 <div class="form-group">
@@ -79,6 +80,7 @@
                                 </div>
 
                                 <button type="submit" class="contact-btn">Submit</button>
+                                <div id="form-status"></div>
                             </form>
                         </div>
                 </section>
