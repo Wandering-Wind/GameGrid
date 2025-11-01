@@ -20,7 +20,10 @@ slides = Array.from(track.children);
 
 /* Adjust positioning */
 function updatePosition() {
-    const slideWidth = slides[0].getBoundingClientRect().width;
+    //const slideWidth = slides[0].getBoundingClientRect().width;
+    const style = window.getComputedStyle(slides[index]);
+    const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+    const slideWidth = slides[index].offsetWidth + margin;
     track.style.transform = `translateX(${-slideWidth * index}px)`;
 }
 
@@ -107,6 +110,17 @@ async function searchGames(query = "indie") {
 
         const container = document.getElementById("rawg-games");
         container.innerHTML = ""; // clear results
+
+        // So error message to prompt user to try something else
+        if (!data.results || data.results.length === 0) {
+            container.innerHTML = `
+                <div class="rawg-error">
+                    Couldn't find anything for "<strong>${query}</strong>". 
+                    Try keywords like <strong>indie</strong>, <strong>rpg</strong>, <strong>clicker</strong>, or <strong>horror</strong>.
+                </div>
+            `;
+            return;
+        }
         
         data.results.forEach(game => {
             const genres = game.genres?.map(g => g.name).join(", ") || "Unknown";
