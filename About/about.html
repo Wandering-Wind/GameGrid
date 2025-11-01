@@ -6,6 +6,7 @@
         <title>About</title>
         <script src="../Scripts/nav.js" defer></script>
         <link rel="stylesheet" href="../Styles/main.css">
+        <link rel="stylesheet" href="about.css">
     </head>
 
     <body>
@@ -14,32 +15,75 @@
             <div id="nav-bar"></div>
         </header>
 
-        <main>
-            <h1>About Me</h1>
-            <div class="h-entry section-wrapper container">
-                <h1 class="p-name" >About me</h1>
-                    <article class="e-content ">
-                        <p class="h-card ">
-                            <figure> 
-                                <img class="u-photo" src="../Images/profile_avatar_2.png" alt="Avatar of me" width="300" height="300">
-                            </figure>
-                            <span class="p-name me-details">Amina Moosa</span><br>
-                            <a class="u-email me-details" href="mailto:moosa.amina00@gmail.com">moosa.amina00@gmail.com</a><br>
-                            <span class="p-org me-details">University of Witwatersrand</span><br>
-                            <span class="p-locality me-details">Johannesburg</span><br>
-                            <span class="p-country-name me-details">South Africa</span>
-                            
-                        </p>
+            <main class="Project-Container">
+                <section class="about-me">
+                    <div class="about-wrapper project-card">
+                        <h1 class="p-name">About Me</h1>
 
-                    <p class="p-name">
-                        South Africa
-                        Hey, I'm Amina Moosa- A 3rd year Digital Arts student at Wits, 
-                        diving deep into the worlds of Game Design and Interactive Media. 
-                        This site is where my worlds come to life. Stick around- I'm just getting started.
-                    </p>
-                    </article>
-            </div>   
-        </main>
+                        <div class="about-card h-card">
+                            <img class="u-photo" src="../Images/profile_avatar_2.png" alt="Avatar of me">
+
+                            <div class="about-name p-name">Amina Moosa</div>
+
+                            <div class="about-meta">
+                                <a class="u-email" href="mailto:moosa.amina00@gmail.com">moosa.amina00@gmail.com</a><br>
+                                <span class="p-org">University of Witwatersrand</span> - 
+                                <span class="p-locality">Johannesburg</span>,
+                                <span class="p-country-name">South Africa</span>
+                            </div>
+
+                            <p class="about-bio p-note project-creator">
+                                Hey, I'm Amina Moosa- A 3rd year Digital Arts student at Wits, 
+                                diving deep into the worlds of Game Design and Interactive Media. 
+                                This site is where my worlds come to life. Stick around- I'm just getting started.
+                                Visit my portfolio website <a href="https://wandering-wind.github.io/DIGA3008A/" target="_blank" >here</a> to get to know more about me.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="form">
+                        <div class="contact-wrapper project-card">
+                            <h2>Contact Me</h2>
+
+                            <form class="contact-form" action="#" method="POST">
+                                <div class="form-group">
+                                    <label for="name">Name *</label>
+                                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Phone (optional)</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="+27 082 000 0000">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reason">Reason for Contact *</label>
+                                    <select id="reason" name="reason" required>
+                                        <option value="" disabled selected>Select one...</option>
+                                        <option>Feature my work</option>
+                                        <option>Collaboration / Creator inquiry</option>
+                                        <option>General question</option>
+                                        <option>Portfolio / Professional inquiry</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message">Message *</label>
+                                    <textarea id="message" name="message" rows="5" required placeholder="Tell me more..."></textarea>
+                                </div>
+
+                                <button type="submit" class="contact-btn">Submit</button>
+                            </form>
+                        </div>
+                </section>
+
+            </main>
 
         <footer>
             <p class="footer">

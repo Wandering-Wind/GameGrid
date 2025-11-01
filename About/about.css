@@ -1,0 +1,171 @@
+/* === ABOUT PAGE STYLES === */
+
+:root {
+    --neon-cyan: #0088ff;
+    --neon-purple: #7000c0;
+    --neon-green: #00ff9d;
+    --neon-blue: #0237b4;
+    --neon-magenta: #dd00ff;
+}
+/* Wrapper */
+.about-wrapper {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Main card */
+.about-card {
+    background: rgba(0, 25, 55, 0.35);
+    border: 1px solid rgba(0, 200, 255, 0.6);
+    border-top: 2px solid var(--neon-cyan);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(12px) saturate(180%);
+    box-shadow: 
+        0 0 12px rgba(0, 255, 255, 0.4),
+        inset 0 0 18px rgba(0, 255, 255, 0.12);
+    transition: 0.3s ease;
+}
+
+/* Hover pulse like HUD card */
+.about-card:hover {
+    box-shadow: 0 0 16px var(--neon-blue), 0 0 40px var(--neon-purple);
+    transform: translateY(-4px);
+}
+
+/* Profile image glow */
+.about-card .u-photo {
+    border-radius: 50%;
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 
+        0 0 15px var(--neon-cyan),
+        0 0 30px rgba(0,255,255,0.4);
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    margin-bottom: 1.2rem;
+}
+
+/* Subtle floating animation */
+.u-photo {
+    animation: floatPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatPulse {
+    0% { transform: translateY(0);}
+    100% { transform: translateY(-6px);}
+}
+
+/* Name */
+.about-name {
+    font-size: 1.8rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 8px var(--neon-green);
+    font-weight: bold;
+}
+
+/* Contact lines */
+.about-meta {
+    font-size: 1rem;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.about-meta a {
+    color: var(--neon-purple);
+    text-shadow: 0 0 8px var(--neon-purple);
+    text-decoration: none;
+}
+
+/* Bio text */
+.about-bio {
+    margin-top: 1.6rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e5eaff;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* === CONTACT FORM STYLES === */
+
+.contact-section {
+    margin-top: 4rem;
+}
+
+.contact-wrapper {
+    max-width: 700px;
+    margin: auto;
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.contact-wrapper h2 {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 12px var(--neon-cyan);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+/* Form layout */
+.contact-form {
+    display: grid;
+    gap: 1.4rem;
+    text-align: left;
+}
+
+/* Inputs */
+.form-group label {
+    font-size: 0.95rem;
+    color: var(--neon-purple);
+    text-shadow: 0 0 8px var(--neon-purple);
+    margin-bottom: 0.3rem;
+    display: inline-block;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    background: rgba(0, 25, 55, 0.35);
+    border: 1px solid rgba(0, 200, 255, 0.4);
+    color: var(--neon-cyan);
+    outline: none;
+    font-family: inherit;
+
+    box-shadow: inset 0 0 10px rgba(0,255,255,0.15);
+    transition: 0.25s ease;
+}
+
+/* Input glow focus */
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green), inset 0 0 10px rgba(0,255,255,0.3);
+}
+
+/* Submit button */
+.contact-btn {
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--neon-magenta);
+    padding: 0.8rem 1.3rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-shadow: 0 0 6px var(--neon-magenta);
+    color: var(--neon-magenta);
+    box-shadow: 0 0 8px var(--neon-magenta);
+    transition: 0.25s ease;
+}
+
+.contact-btn:hover {
+    background: var(--neon-magenta);
+    color: #02030a;
+    box-shadow: 0 0 20px var(--neon-magenta);
+}
