@@ -1,26 +1,39 @@
 //Using the similar logic from the game.js
+
+/*document.getElementById("show-all").addEventListener("click", () => {
+    document.querySelectorAll(".project-card").forEach(card => {
+        card.style.display = "";
+    });
+});
+
 document.addEventListener("DOMContentLoaded", () => {
+    const tags = document.querySelectorAll(".tag");
+    const cards = document.querySelectorAll(".project-card");
+
+    tags.forEach(tag => {
+        tag.style.cursor = "pointer";
+
+        tag.addEventListener("click", () => {
+            const selectedTag = tag.textContent.trim().toLowerCase();
+
+            cards.forEach(card => {
+                const cardTags = card.dataset.tags.toLowerCase();
+
+                if (cardTags.includes(selectedTag)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
+});
+*/
+
+document.addEventListener("DOMContentLoaded", () => {
+    const tags = document.querySelectorAll(".tag");
     const cards = document.querySelectorAll(".project-card");
     const showAllBtn = document.getElementById("show-all");
-
-    // Collect unique tags from all cards
-    const tagSet = new Set();
-    cards.forEach(card => {
-        const cardTags = card.querySelectorAll(".tag");
-        cardTags.forEach(tag => tagSet.add(tag.textContent.trim()));
-    });
-
-    const tagFilterContainer = document.querySelector(".tag-filter-container");
-
-    // Create buttons for each tag
-    tagSet.forEach(tagName => {
-        const button = document.createElement("button");
-        button.textContent = tagName;
-        button.classList.add("tag");
-        button.style.cursor = "pointer";
-        tagFilterContainer.appendChild(button);
-    });
-
     let activeTag = null;
 
     function resetCards() {
@@ -28,13 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function clearActive() {
-        document.querySelectorAll(".tag").forEach(tag => tag.classList.remove("active"));
+        tags.forEach(tag => tag.classList.remove("active"));
         showAllBtn.classList.remove("active");
     }
 
     // Tag filter click
-    const allTagButtons = document.querySelectorAll(".tag");
-    allTagButtons.forEach(tag => {
+    tags.forEach(tag => {
+        tag.style.cursor = "pointer";
+
         tag.addEventListener("click", () => {
             const selectedTag = tag.textContent.trim().toLowerCase();
 
@@ -51,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tag.classList.add("active");
 
             cards.forEach(card => {
-                const cardTags = Array.from(card.querySelectorAll(".tag")).map(t => t.textContent.trim().toLowerCase());
+                const cardTags = card.dataset.tags.toLowerCase();
                 card.style.display = cardTags.includes(selectedTag) ? "" : "none";
             });
         });
@@ -65,3 +79,53 @@ document.addEventListener("DOMContentLoaded", () => {
         resetCards();
     });
 });
+/*
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".project-card");
+    const showAllBtn = document.getElementById("show-all");
+    const tags = document.querySelectorAll(".tag-filter-container .tag");
+    let activeTag = null;
+
+    function resetCards() {
+        cards.forEach(card => card.style.display = "");
+    }
+
+    function clearActive() {
+        tags.forEach(tag => tag.classList.remove("active"));
+        showAllBtn.classList.remove("active");
+    }
+
+    // Tag button click
+    tags.forEach(tagBtn => {
+        tagBtn.addEventListener("click", () => {
+            const selectedTag = tagBtn.textContent.trim().toLowerCase();
+
+            // Clicking same tag again toggles off
+            if (activeTag === selectedTag) {
+                activeTag = null;
+                clearActive();
+                resetCards();
+                return;
+            }
+
+            activeTag = selectedTag;
+            clearActive();
+            tagBtn.classList.add("active");
+
+            cards.forEach(card => {
+                const cardTags = Array.from(card.querySelectorAll(".project-tags .tag"))
+                    .map(t => t.textContent.trim().toLowerCase());
+                card.style.display = cardTags.includes(selectedTag) ? "" : "none";
+            });
+        });
+    });
+
+    // Show All
+    showAllBtn.addEventListener("click", () => {
+        activeTag = null;
+        clearActive();
+        showAllBtn.classList.add("active");
+        resetCards();
+    });
+});
+*/
