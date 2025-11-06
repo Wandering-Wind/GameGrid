@@ -1,0 +1,124 @@
+:root {
+    --neon-cyan: #0088ff;
+    --neon-purple: #7000c0;
+    --neon-green: #00ff9d;
+    --neon-blue: #0237b4;
+    --neon-magenta: #dd00ff;
+}
+
+/* === CREATORS PAGE STYLING === */
+/* Builds on the main.css aesthetic */
+
+html {
+  scroll-behavior: smooth;
+}
+/* Page-level tweaks */
+.Project-Container {
+    max-width: 1100px;
+    margin: auto;
+    text-align: left;
+}
+
+/* Card spacing and consistency */
+.project-card {
+    padding: 2rem;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    background: rgba(0, 25, 55, 0.45);
+    box-shadow: inset 0 0 18px rgba(0, 255, 255, 0.1), 0 0 20px rgba(112, 0, 192, 0.25);
+}
+
+/* Headings inside cards (Creator names) */
+.project-title {
+    font-size: 1.8rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan);
+    margin-bottom: 0.6rem;
+}
+
+/* Summary (short bio) */
+.project-summary {
+    color: #d3e7ff;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* === CREATOR DETAIL HEADINGS === */
+.creator-details {
+    font-size: 0.95rem;
+    margin: 0.4rem 0;
+    color: #a5c6ff;
+    line-height: 1.5;
+    border-left: 3px solid var(--neon-green);
+    padding-left: 0.6rem;
+    transition: 0.3s;
+}
+
+.creator-details:hover {
+    color: var(--neon-green);
+    text-shadow: 0 0 6px var(--neon-green);
+}
+
+/* Label emphasis (Members, typa label) */
+.creator-details strong {
+    color: var(--neon-magenta);
+    text-shadow: 0 0 8px var(--neon-magenta);
+    font-weight: 700;
+}
+
+/* === CREATOR LINKS SECTION === */
+.project-links ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.project-links li {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+}
+
+/* Creator external links (Itch and whatnot) */
+.creator-link {
+    color: var(--neon-green);
+    text-decoration: none;
+    text-shadow: 0 0 6px var(--neon-green);
+    transition: 0.25s;
+}
+
+.creator-link:hover {
+    color: var(--neon-magenta);
+    text-shadow: 0 0 12px var(--neon-magenta);
+}
+
+/* === OPTIONAL: ADDITIONAL SUBHEADINGS === */
+.section-heading {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px var(--neon-purple);
+    margin-top: 1.5rem;
+    border-bottom: 1px solid rgba(112, 0, 192, 0.4);
+    padding-bottom: 0.3rem;
+}
+
+/* === Hover animation for the entire card === 
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 16px var(--neon-cyan), 0 0 30px var(--neon-purple);
+    transition: 0.3s ease;
+}
+    */
+
+/* === Responsive adjustments === */
+@media (max-width: 600px) {
+    .project-card {
+        padding: 1.2rem;
+    }
+
+    .creator-details {
+        font-size: 0.9rem;
+        border-left-width: 2px;
+    }
+}
