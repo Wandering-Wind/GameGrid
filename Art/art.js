@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     const images = document.querySelectorAll('.project-card img');
     const overlay = document.getElementById('lightbox-overlay');
     const lightboxImg = overlay.querySelector('img');
@@ -45,4 +45,67 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.key === 'Escape') overlay.style.display = 'none';
         }
     });
+});
+*/
+
+//Fixes the issue of where the image is only visible at the top in gallery mode
+document.addEventListener("DOMContentLoaded", () => {
+  const images = document.querySelectorAll('.project-card img');
+  const overlay = document.getElementById('lightbox-overlay');
+  const lightboxImg = overlay.querySelector('img');
+  const closeBtn = document.getElementById('close-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const prevBtn = document.getElementById('prev-btn');
+
+  let currentIndex = 0;
+  const imageArray = Array.from(images);
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = imageArray[currentIndex].src;
+    overlay.style.display = 'flex';
+    document.body.classList.add('lightbox-open');
+
+    // Focus the modal for key handling + some mobile browsers
+    overlay.focus();
+
+    // Belt-and-suspenders: if some browser paints it “up top”, yank view to top
+    // (Fixed-position overlay should cover the viewport anyway, but this ensures visibility.)
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }
+
+  function closeLightbox() {
+    overlay.style.display = 'none';
+    document.body.classList.remove('lightbox-open');
+  }
+
+  images.forEach((img, idx) => {
+    img.addEventListener('click', () => openLightbox(idx));
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % imageArray.length;
+    lightboxImg.src = imageArray[currentIndex].src;
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + imageArray.length) % imageArray.length;
+    lightboxImg.src = imageArray[currentIndex].src;
+  });
+
+  // Close on overlay click (but not when clicking the image or buttons)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  // Keyboard navigation when overlay is open
+  document.addEventListener('keydown', (e) => {
+    if (overlay.style.display === 'flex') {
+      if (e.key === 'ArrowRight') nextBtn.click();
+      if (e.key === 'ArrowLeft')  prevBtn.click();
+      if (e.key === 'Escape')     closeLightbox();
+    }
+  });
 });
