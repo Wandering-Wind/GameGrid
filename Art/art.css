@@ -69,13 +69,10 @@ body.lightbox-open {
     backdrop-filter: blur(4px);
     padding: 0;            /*prevents image being pushed down*/
     margin: 0;
-
-
-
 }
 
 /* Trynna fit the image properly on screen */
-#lightbox-overlay img {
+#lightbox-overlay img, #lightbox-overlay video {
     max-width: 90vw;       /* slightly wider on big screens */
     max-height: 90vh;      /* give it more space to breathe */
     width: auto;

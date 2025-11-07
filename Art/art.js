@@ -46,7 +46,9 @@
         }
     });
 });
-*/
+
+
+
 
 //Fixes the issue of where the image is only visible at the top in gallery mode
 document.addEventListener("DOMContentLoaded", () => {
@@ -125,7 +127,115 @@ document.addEventListener("DOMContentLoaded", () => {
         showAllBtn.classList.remove("active");
     }
 
-    // Tag filter click
+*/
+
+//Allows for the videos to play too! And it works!! Good stuff!
+document.addEventListener("DOMContentLoaded", () => {
+  const thumbs = document.querySelectorAll('.project-card img');
+  const overlay = document.getElementById('lightbox-overlay');
+  const closeBtn = document.getElementById('close-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const prevBtn = document.getElementById('prev-btn');
+  const content = document.getElementById('lightbox-content');
+
+  // Build a media list (image or video)
+  const items = Array.from(thumbs).map(img => {
+    const videoSrc = img.dataset.video;
+    return {
+      type: videoSrc ? 'video' : 'image',
+      src: videoSrc ? videoSrc : img.src,
+      poster: img.src,
+      alt: img.alt || 'Artwork',
+      el: img
+    };
+  });
+
+  let currentIndex = 0;
+
+  function renderCurrent() {
+    content.innerHTML = '';
+
+    const item = items[currentIndex];
+    if (item.type === 'image') {
+      const media = new Image();
+      media.src = item.src;
+      media.alt = item.alt;
+      content.appendChild(media);
+    } else {
+      const video = document.createElement('video');
+      video.controls = true;
+      video.autoplay = true;          // user initiated (click), usually OK
+      video.muted = true;             // improves autoplay reliability across browsers
+      video.loop = true;              // optional, looks nice for turntables
+      video.playsInline = true;       // iOS full-screen prevention
+      if (item.poster) video.poster = item.poster;
+
+      // Source (set type if you know it; this is optional)
+      const source = document.createElement('source');
+      source.src = item.src;
+      // source.type = 'video/mp4';   // uncomment if you know the codec/type
+      video.appendChild(source);
+
+      content.appendChild(video);
+      // In case browser blocks autoplay even after click, start on metadata loaded
+      video.addEventListener('loadeddata', () => {
+        try { video.play(); } catch (_) {}
+      });
+    }
+  }
+
+  function openLightbox(index) {
+    currentIndex = index;
+    renderCurrent();
+    overlay.style.display = 'flex';
+    document.body.classList.add('lightbox-open');
+    overlay.focus();
+    // Optional: force viewport to top (belt-and-suspenders)
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }
+
+  function closeLightbox() {
+    // Pause any playing video to stop audio after close
+    const vid = content.querySelector('video');
+    if (vid && !vid.paused) { try { vid.pause(); } catch (_) {} }
+
+    overlay.style.display = 'none';
+    document.body.classList.remove('lightbox-open');
+    content.innerHTML = '';
+  }
+
+  thumbs.forEach((img, idx) => {
+    img.addEventListener('click', () => openLightbox(idx));
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % items.length;
+    renderCurrent();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    renderCurrent();
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  // Keyboard controls
+  document.addEventListener('keydown', (e) => {
+    if (overlay.style.display === 'flex') {
+      if (e.key === 'ArrowRight') nextBtn.click();
+      if (e.key === 'ArrowLeft')  prevBtn.click();
+      if (e.key === 'Escape')     closeLightbox();
+    }
+  });
+});
+
+
+// Tag filter click
     tags.forEach(tag => {
         tag.style.cursor = "pointer";
 
@@ -158,4 +268,4 @@ document.addEventListener("DOMContentLoaded", () => {
         showAllBtn.classList.add("active");
         resetCards();
     });
-});
+//});
