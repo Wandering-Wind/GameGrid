@@ -429,6 +429,26 @@ footer p:last-child {
 
     .nav-links a.active-link::after { bottom: -4px; height: 2px; }
     .nav-links a.active-link::before { display: none; }
+
+      main {
+        padding: 2rem 1rem;
+    }
+
+    h1, h2 {
+        margin-bottom: 2rem;
+    }
+
+    .project-card {
+        padding: 1rem;
+    }
+
+    .footer a {
+        font-size: 0.9rem;
+    }
+
+    footer p:last-child {
+        font-size: 1rem;
+    }
 }
 
 @keyframes glowPulse {
