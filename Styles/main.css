@@ -233,56 +233,77 @@ article.e-content {
   user-select: none;
 }
 
+/* === FILTER BAR (shared across Games / Art / Creators) === */
 .tag-filter-container {
-   
-    margin-bottom: 2rem; /* space below the button */
-    padding: 0.5rem 0;   /* padding around the button */
-    display: flex;
-    justify-content: center; /* center the button (optional) */
+  display: flex;
+  flex-wrap: wrap;          /* allow wrapping on smaller screens */
+  justify-content: center;  /* keep centered under the heading */
+  gap: 0.8rem 1rem;         /* row/column gaps */
+  margin: 0 auto 2rem;
+  padding: 0.5rem 0;
 }
-/*.tag, .show-all {
-    border: 1px solid var(--neon-purple);
-    padding: 0.2rem 0.6rem;
-    font-size: 0.85rem;
-    border-radius: 8px;
-    text-shadow: 0 0 6px var(--neon-purple);
-}*/
 
-/* Tag + Show All Default Style*/
+/* Base pill styles (Show All + Tag buttons) */
 .tag,
 .show-all {
-    cursor: pointer;
-    border: 1px solid var(--neon-magenta);
-    padding: 0.2rem 0.6rem;
-    font-size: 0.85rem;
-    border-radius: 8px;
-    text-shadow: 0 0 6px var(--neon-magenta);
-    color: var(--neon-magenta);
-    background: transparent;
-    transition: 0.25s ease;
-    font-weight: bold;
+  cursor: pointer;
+  user-select: none;
 
-    /* Base glowing effect */
-    background: transparent;
-    box-shadow: 0 0 6px var(--neon-magenta);
-    text-shadow: 0 0 4px var(--neon-magenta);
+  /* Size & touch targets */
+  font-weight: 800;
+  font-family: 'Share Tech Mono', sans-serif;
+  text-transform: none;
+  letter-spacing: 0.4px;
+
+  /* Responsive size:
+     min 0.95rem, scales with viewport, caps at 1.15rem */
+  font-size: clamp(0.95rem, 0.6rem + 1vw, 1.15rem);
+
+  /* Responsive padding:
+     scales but never goes too tiny/huge */
+  padding: clamp(0.5rem, 0.35rem + 0.8vw, 0.8rem)
+           clamp(0.9rem, 0.6rem + 1.2vw, 1.4rem);
+
+  min-height: 44px;               /* a11y tap target */
+  border-radius: 999px;           /* pill look */
+  line-height: 1;
+
+  /* Your existing neon look, kept intact */
+  border: 1px solid var(--neon-magenta);
+  color: var(--neon-magenta);
+  background: rgba(221, 0, 255, 0.08);
+  box-shadow: 0 0 6px var(--neon-magenta);
+  text-shadow: 0 0 4px var(--neon-magenta);
+
+  /* Smooth hover/active transitions */
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-/* Hover — invert colours neon style */
+/* Hover — invert colours neon style (kept) + tiny lift */
 .tag:hover,
 .show-all:hover {
-    background: var(--neon-magenta);
-    color: #02030a;
-    box-shadow: 0 0 10px var(--neon-magenta);
+  background: var(--neon-magenta);
+  color: #02030a;
+  box-shadow: 0 0 12px var(--neon-magenta), 0 0 24px var(--neon-magenta);
+  transform: translateY(-1px);
 }
 
-/* Active tag — glowing selected state */
+/* Active/selected state — brighter and greener to match your theme */
 .tag.active,
 .show-all.active {
-    background: rgba(112, 0, 192, 0.4);
-    color: var(--neon-green);
-    border-color: var(--neon-green);
-    box-shadow: 0 0 15px var(--neon-green), 0 0 30px var(--neon-green);
+  background: rgba(112, 0, 192, 0.45);
+  color: var(--neon-green);
+  border-color: var(--neon-green);
+  box-shadow: 0 0 15px var(--neon-green), 0 0 30px var(--neon-green);
+  transform: none;
+}
+
+/* Keyboard accessibility */
+.tag:focus-visible,
+.show-all:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+  box-shadow: 0 0 12px var(--neon-cyan);
 }
 
 /* Buttons */
@@ -398,6 +419,12 @@ footer p:last-child {
     /*article.e-content {
         grid-template-columns: repeat(2, 1fr);
     }*/
+    .tag,
+    .show-all {
+        font-size: clamp(0.95rem, 0.7rem + 0.8vw, 1.05rem);
+        padding: clamp(0.5rem, 0.4rem + 0.6vw, 0.7rem)
+                clamp(0.9rem, 0.6rem + 1vw, 1.2rem);
+    }
 }
 
 /* Mobile adjustments */
@@ -405,6 +432,17 @@ footer p:last-child {
     footer .footer a {
         display: block;
         margin: 0.4rem 0;
+    }
+
+    .tag-filter-container {
+        gap: 0.6rem 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+    .tag,
+    .show-all {
+        font-size: clamp(0.95rem, 0.85rem + 0.6vw, 1rem);
+        padding: 0.55rem 1rem;
+        min-height: 44px; /* keep tap target */
     }
 }
 
