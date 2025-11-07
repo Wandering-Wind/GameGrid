@@ -235,37 +235,54 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Tag filter click
-    tags.forEach(tag => {
-        tag.style.cursor = "pointer";
+// === TAG FILTERS ===
+document.addEventListener("DOMContentLoaded", () => {
+  // Only pick the filter buttons in the filter bar, not the chips inside cards
+  const tags = document.querySelectorAll(".tag-filter-container .tag");    // "2D", "3D"
+  const showAllBtn = document.getElementById("show-all");
+  const cards = document.querySelectorAll(".project-card");
 
-        tag.addEventListener("click", () => {
-            const selectedTag = tag.textContent.trim().toLowerCase();
+  let activeTag = null;
 
-            // Clicking same tag again toggles off
-            if (activeTag === selectedTag) {
-                activeTag = null;
-                clearActive();
-                resetCards();
-                return;
-            }
+  function resetCards() {
+    cards.forEach(card => { card.style.display = ""; });
+  }
 
-            activeTag = selectedTag;
-            clearActive();
-            tag.classList.add("active");
+  function clearActive() {
+    tags.forEach(btn => btn.classList.remove("active"));
+    showAllBtn.classList.remove("active");
+  }
 
-            cards.forEach(card => {
-                const cardTags = card.dataset.tags.toLowerCase();
-                card.style.display = cardTags.includes(selectedTag) ? "" : "none";
-            });
-        });
-    });
+  // Wire up tag buttons
+  tags.forEach(btn => {
+    btn.style.cursor = "pointer";
+    btn.addEventListener("click", () => {
+      const selectedTag = btn.textContent.trim().toLowerCase(); // "2d" or "3d"
 
-    // Show All logic
-    showAllBtn.addEventListener("click", () => {
+      // Toggle off if clicking the same active tag
+      if (activeTag === selectedTag) {
         activeTag = null;
         clearActive();
-        showAllBtn.classList.add("active");
         resetCards();
+        return;
+      }
+
+      activeTag = selectedTag;
+      clearActive();
+      btn.classList.add("active");
+
+      cards.forEach(card => {
+        const cardTags = (card.dataset.tags || "").toLowerCase(); // "2d" or "3d"
+        card.style.display = cardTags.includes(selectedTag) ? "" : "none";
+      });
     });
-//});
+  });
+
+  // Show All
+  showAllBtn.addEventListener("click", () => {
+    activeTag = null;
+    clearActive();
+    showAllBtn.classList.add("active");
+    resetCards();
+  });
+});
