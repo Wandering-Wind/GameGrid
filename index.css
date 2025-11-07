@@ -84,7 +84,7 @@
 }
 
 /* Game Image */
-.rawg-card img {
+.rawg-card img, .responsive-img {
     width: 100%;
     border-radius: 10px;
     border: 1px solid var(--neon-cyan);
