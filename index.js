@@ -1,94 +1,99 @@
+const container = document.querySelector('.carousel-container');
 const track = document.querySelector('.carousel-track');
-let slides = Array.from(track.children);
 const nextBtn = document.querySelector('.next');
 const prevBtn = document.querySelector('.prev');
 
-let index = 1; // start at 1 because we will clone slides
-let interval;
+let slides = Array.from(track.children);
 
-/* Clone slides to create infinite loop */
+// --- Clone ends for infinite loop
 const firstClone = slides[0].cloneNode(true);
-const lastClone = slides[slides.length - 1].cloneNode(true);
-
+const lastClone  = slides[slides.length - 1].cloneNode(true);
 firstClone.classList.add('clone');
 lastClone.classList.add('clone');
-
 track.appendChild(firstClone);
 track.insertBefore(lastClone, slides[0]);
 
 slides = Array.from(track.children);
 
-/* Adjust positioning */
-function updatePosition() {
-    //const slideWidth = slides[0].getBoundingClientRect().width;
-    const style = window.getComputedStyle(slides[index]);
-    const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-    const slideWidth = slides[index].offsetWidth + margin;
-    track.style.transform = `translateX(${-slideWidth * index}px)`;
+let index = 1;        // start at first real slide
+let interval = null;
+let centers = [];     // centers of slides relative to track left (px)
+
+// Compute centers of each slide
+function computeCenters() {
+  centers = slides.map(el => el.offsetLeft + el.offsetWidth / 2);
 }
 
-function updateActiveClass() {
-    slides.forEach(s => s.classList.remove("active"));
-    slides[index].classList.add("active");
+// Translate so active slide is centered in container
+function goToIndex(i, animate = true) {
+  index = i;
+  const containerCenter = container.clientWidth / 2;
+  const slideCenter = centers[index];
+  const target = -(slideCenter - containerCenter);
+
+  track.style.transition = animate ? 'transform 0.6s ease' : 'none';
+  track.style.transform = `translateX(${target}px)`;
+
+  slides.forEach(s => s.classList.remove('active'));
+  slides[index].classList.add('active');
 }
 
+// Next/Prev
 function nextSlide() {
-    if (index >= slides.length - 1) return;
-    index++;
-    moveSlides();
+  if (index >= slides.length - 1) return;
+  goToIndex(index + 1, true);
+}
+function prevSlide() {
+  if (index <= 0) return;
+  goToIndex(index - 1, true);
 }
 
-function prevSlideFunc() {
-    if (index <= 0) return;
-    index--;
-    moveSlides();
-}
-
-function moveSlides() {
-    const slideWidth = slides[0].getBoundingClientRect().width;
-    track.style.transition = "0.5s ease";
-    track.style.transform = `translateX(${-slideWidth * index}px)`;
-    updateActiveClass();
-}
-
-/* Looping logic (jump without animation) */
-track.addEventListener("transitionend", () => {
-    if (slides[index].classList.contains("clone")) {
-        track.style.transition = "none";
-        if (index === slides.length - 1) index = 1;
-        if (index === 0) index = slides.length - 2;
-        updatePosition();
-        updateActiveClass();
-    }
+// Handle infinite jump (no animation)
+track.addEventListener('transitionend', () => {
+  if (slides[index].classList.contains('clone')) {
+    if (index === slides.length - 1) index = 1;              // jumped past lastClone
+    if (index === 0) index = slides.length - 2;              // jumped before last real
+    goToIndex(index, false);
+  }
 });
 
-/* Auto slide */
-function startAutoSlide() {
-    interval = setInterval(() => nextSlide(), 3000);
+// Autoplay (desktop)
+function startAuto() {
+  // Skip autoplay on small screens (native scroll UX)
+  if (window.matchMedia('(max-width: 640px)').matches) return;
+  stopAuto();
+  interval = setInterval(nextSlide, 3000);
 }
-function stopAutoSlide() {
-    clearInterval(interval);
+function stopAuto() {
+  if (interval) clearInterval(interval);
+  interval = null;
 }
 
-track.addEventListener("mouseenter", stopAutoSlide);
-track.addEventListener("mouseleave", startAutoSlide);
+track.addEventListener('mouseenter', stopAuto);
+track.addEventListener('mouseleave', startAuto);
 
-nextBtn.addEventListener("click", () => {
-    stopAutoSlide();
-    nextSlide();
-    startAutoSlide();
+// Pause on any user interaction
+['mousedown','touchstart','pointerdown'].forEach(ev => {
+  track.addEventListener(ev, stopAuto, { passive: true });
 });
 
-prevBtn.addEventListener("click", () => {
-    stopAutoSlide();
-    prevSlideFunc();
-    startAutoSlide();
+// Buttons
+if (nextBtn) nextBtn.addEventListener('click', () => { stopAuto(); nextSlide(); startAuto(); });
+if (prevBtn) prevBtn.addEventListener('click', () => { stopAuto(); prevSlide(); startAuto(); });
+
+// Recompute on resize (slides may change width)
+window.addEventListener('resize', () => {
+  const wasAnimating = !!interval;
+  track.style.transition = 'none';
+  computeCenters();
+  goToIndex(index, false);
+  if (wasAnimating) startAuto();
 });
 
-/* Init */
-updatePosition();
-updateActiveClass();
-startAutoSlide();
+// Init
+computeCenters();
+goToIndex(index, false);
+startAuto();
 
 
 //API
