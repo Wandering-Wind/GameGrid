@@ -75,7 +75,7 @@ body::after {
     background: none;
     border: none;
     font-size: 2rem;
-    color: var(--accent, #00ffc8);
+    color: var(--accent, #0088ff);
 }
 
 main {
