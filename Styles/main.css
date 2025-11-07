@@ -10,6 +10,10 @@
     --neon-green: #00ff9d;*/
 }
 
+
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap');
+
 /* === Futuristic HUD Background === */
 /*=== So for the background style, scanlines + a subtle kind of grid + neon glow misty thing===*/
 body {
@@ -18,9 +22,19 @@ body {
                 #02030a;
     background-size: cover;
     backdrop-filter: blur(2px);
-    color: #e5eaff;
-    font-family: "Orbitron", "Audiowide", sans-serif;
+    color: #d4dbf8;
     overflow-x: hidden;
+    font-family: 'Share Tech Mono', sans-serif;
+    font-weight: 400;
+    /*line-height: 1.6;*/
+}
+
+/* Headings font */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Audiowide', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase; /* optional for a game/cyber style */
 }
 
 /* Scanline Effect */
