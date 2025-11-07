@@ -167,13 +167,13 @@ document.addEventListener("DOMContentLoaded", () => {
       video.autoplay = true;          // user initiated (click), usually OK
       video.muted = true;             // improves autoplay reliability across browsers
       video.loop = true;              // optional, looks nice for turntables
-      video.playsInline = true;       // iOS full-screen prevention
+      video.playsInline = true;       // iOS full-screen prevention, psshtt Apple has to be different heyy
       if (item.poster) video.poster = item.poster;
 
       // Source (set type if you know it; this is optional)
       const source = document.createElement('source');
       source.src = item.src;
-      // source.type = 'video/mp4';   // uncomment if you know the codec/type
+      // source.type = 'video/mp4';   // just to be safe of the codec/type
       video.appendChild(source);
 
       content.appendChild(video);
