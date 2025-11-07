@@ -61,6 +61,39 @@ body::after {
     border-bottom: 2px solid var(--accent, #0088ff);
 }
 
+/* Active (current page) link */
+.nav-links a.active-link {
+  color: var(--neon-green);
+  text-shadow: 0 0 6px var(--neon-green), 0 0 18px var(--neon-green);
+  position: relative;
+}
+
+/* Glowing underline bar */
+.nav-links a.active-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+  box-shadow: 0 0 10px var(--neon-green), 0 0 18px var(--neon-cyan);
+  animation: activePulse 1.8s ease-in-out infinite;
+}
+
+/* Optional corner “brackets” for extra HUD vibes */
+.nav-links a.active-link::before {
+  content: "◢";
+  position: absolute; left: -12px; bottom: -12px;
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+@keyframes activePulse {
+  0%,100% { opacity: 0.85; filter: drop-shadow(0 0 4px var(--neon-green)); }
+  50%     { opacity: 1;    filter: drop-shadow(0 0 10px var(--neon-cyan)); }
+}
+
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
@@ -299,6 +332,9 @@ article.e-content {
     .nav-links.open {
         display: flex;
     }
+
+    .nav-links a.active-link::after { bottom: -4px; height: 2px; }
+    .nav-links a.active-link::before { display: none; }
 }
 
 @keyframes glowPulse {
