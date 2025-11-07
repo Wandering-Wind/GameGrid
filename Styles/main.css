@@ -265,7 +265,7 @@ article.e-content {
            clamp(0.9rem, 0.6rem + 1.2vw, 1.4rem);
 
   min-height: 44px;               /* a11y tap target */
-  border-radius: 999px;           /* pill look */
+  border-radius: 10px;           /* pill look */
   line-height: 1;
 
   /* Your existing neon look, kept intact */

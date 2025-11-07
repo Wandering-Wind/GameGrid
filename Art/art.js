@@ -329,3 +329,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Swipe gestures (being mobile-friendly)
+let touchStartX = null;
+overlay.addEventListener('touchstart', (e) => {
+  if (e.touches && e.touches.length === 1) {
+    touchStartX = e.touches[0].clientX;
+  }
+}, { passive: true });
+
+overlay.addEventListener('touchend', (e) => {
+  if (touchStartX === null) return;
+  const endX = (e.changedTouches && e.changedTouches[0].clientX) || touchStartX;
+  const dx = endX - touchStartX;
+  const SWIPE_THRESHOLD = 50; // px
+  if (Math.abs(dx) > SWIPE_THRESHOLD) {
+    if (dx < 0) nextBtn.click(); else prevBtn.click();
+  }
+  touchStartX = null;
+});
