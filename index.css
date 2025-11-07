@@ -174,6 +174,49 @@
 .prev { left: 10px; }
 .next { right: 10px; }
 
+/* Homepage excerpt, trying to make it fit cohesively*/
+.about-container {
+    /* Match the carousel width & centering */
+    max-width: 1100px;
+    margin: 0 auto 2.5rem;      /* same horizontal centering, nice bottom rhythm */
+    padding: 0 2rem;            /* mirrors carousel’s side breathing room */
+    }
+.about-text {
+    /* Cohesive HUD card styling (subtle, not as heavy as project cards) */
+    text-align: center;
+    margin: 0 auto;             /* keep text centered in its container */
+    max-width: 70ch;            /* pleasant reading width */
+    padding: 1.1rem 1.25rem;
+    border-radius: 10px;
+
+    background: rgba(0, 25, 55, 0.28);
+    border: 1px solid rgba(0, 200, 255, 0.45);
+    border-top: 2px solid rgba(0, 255, 255, 0.6);
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, 0.18),
+        inset 0 0 16px rgba(0, 255, 255, 0.10);
+
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+    line-height: 1.6;
+    color: #d4dbf8;
+}
+
+    /* tighten spacing between H1 and the excerpt a touch, and between excerpt & H2 */
+.about h1.p-name {
+    margin-bottom: 1.2rem;      /* default was ~3rem; this pulls the excerpt closer */
+    }
+.featuring h2.p-name {
+    margin-top: 2.2rem;         /* keeps nice rhythm after the excerpt block */
+    }
+
+    /* Mobile tweaks — keep everything comfortable */
+@media (max-width: 640px) {
+    .about-container { padding: 0 1rem; margin-bottom: 2rem; }
+    .about-text { padding: 0.9rem 1rem; max-width: 90ch; }
+    .about h1.p-name { margin-bottom: 1rem; }
+    .featuring h2.p-name { margin-top: 1.6rem; }
+    }
+
 /* --- Mobile: native scroll & hide arrows --- */
 @media (max-width: 640px) {
   .carousel-container {
