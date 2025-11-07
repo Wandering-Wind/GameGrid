@@ -111,59 +111,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const linksList = document.querySelector(".nav-links");
   toggle.addEventListener("click", () => linksList.classList.toggle("open"));
 
-  // --- Active link highlighting
+  // --- Active link highlighting (EXACT pathname match after normalization)
   const links = linksList.querySelectorAll("a");
 
-  // Normalize a path: remove trailing "index.html", ensure prefix, drop hash/query
-  const normalize = (url) => {
-    try {
-      const u = new URL(url, window.location.origin);
-      let p = u.pathname;
+  // Normalize pathname so ".../index.html" === ".../", handle prefix root
+  function normalizePathname(pathname, prefix) {
+    if (!pathname) return '/';
 
-      // For GitHub Pages: home may be /GameGrid/ or /GameGrid/index.html
-      if (p.endsWith("/index.html")) p = p.slice(0, -"/index.html".length) + "/";
+    // If using a repo prefix and pathname equals the prefix without trailing slash,
+    // normalize it to have a trailing slash (e.g. "/GameGrid" -> "/GameGrid/")
+    if (prefix && pathname === prefix) return prefix + '/';
 
-      // Ensure a single trailing slash for section roots
-      if (!p.endsWith(".html") && !p.endsWith("/")) p += "/";
-
-      return p;
-    } catch {
-      return url;
+    // Collapse ".../index.html" -> ".../"
+    if (pathname.endsWith('/index.html')) {
+      return pathname.slice(0, -'index.html'.length);
     }
-  };
 
-  const current = normalize(window.location.href);
+    return pathname;
+  }
 
-  // Find best match (exact path or begins-with for pages with fragments)
+  const currentPath = normalizePathname(window.location.pathname, pathPrefix);
   let activated = false;
-  links.forEach((a) => {
-    const hrefPath = normalize(a.href);
 
-    // Exact match first
-    if (hrefPath === current) {
-      a.classList.add("active-link");
-      a.setAttribute("aria-current", "page");
+  // 1) Exact match only
+  for (const a of links) {
+    const hrefPath = normalizePathname(new URL(a.href, window.location.origin).pathname, pathPrefix);
+    if (hrefPath === currentPath) {
+      a.classList.add('active-link');
+      a.setAttribute('aria-current', 'page');
       activated = true;
-      return;
+      break;
     }
+  }
 
-    // If on creators page with a fragment (e.g. creators.html#arya...), start-with still matches
-    if (!activated && current.startsWith(hrefPath)) {
-      a.classList.add("active-link");
-      a.setAttribute("aria-current", "page");
-      activated = true;
-    }
-  });
-
-  // Fallback: if nothing matched (e.g. 404 or different file), try simple contains of filename
+  // 2) Fallback: if on literal site root, ensure Home is highlighted
   if (!activated) {
-    const path = window.location.pathname;
-    links.forEach((a) => {
-      if (!activated && a.pathname && path.includes(a.pathname.replace(/\/index\.html$/, '/'))) {
-        a.classList.add("active-link");
-        a.setAttribute("aria-current", "page");
-        activated = true;
+    for (const a of links) {
+      const hrefPath = normalizePathname(new URL(a.href, window.location.origin).pathname, pathPrefix);
+      const homePath = pathPrefix ? `${pathPrefix}/` : '/';
+      if (currentPath === homePath && hrefPath === homePath) {
+        a.classList.add('active-link');
+        a.setAttribute('aria-current', 'page');
+        break;
       }
-    });
+    }
   }
 });
