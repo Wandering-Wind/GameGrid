@@ -172,8 +172,6 @@ article.e-content {
     transition: 0.25s ease;
 }
 
-
-
 /* Hover glow HUD feel */
 .project-card:hover {
     box-shadow: 0 0 16px var(--neon-blue), 0 0 40px var(--neon-purple);
@@ -301,11 +299,107 @@ article.e-content {
     box-shadow: 0 0 14px var(--neon-cyan);
 }
 
+/* === FOOTER === */
+footer {
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(0, 25, 55, 0.25), rgba(0, 0, 0, 0.6));
+    border-top: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+    color: #b8c2f8;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle grid overlay to match my  HUD theme */
+footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to right,
+        rgba(0, 255, 255, 0.05) 0px,
+        rgba(0, 255, 255, 0.05) 1px,
+        transparent 1px,
+        transparent 20px
+    ),
+    repeating-linear-gradient(
+        to bottom,
+        rgba(0, 255, 255, 0.05) 0px,
+        rgba(0, 255, 255, 0.05) 1px,
+        transparent 1px,
+        transparent 20px
+    );
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Link section */
+footer .footer a {
+    margin: 0 0.8rem;
+    text-decoration: none;
+    color: var(--neon-cyan);
+    font-weight: bold;
+    text-shadow: 0 0 8px var(--neon-cyan);
+    transition: 0.25s;
+    position: relative;
+}
+
+/* Hover glow animation */
+footer .footer a:hover {
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green), 0 0 25px var(--neon-green);
+}
+
+/* Separator glow line */
+footer .footer a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--neon-cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+footer .footer a:hover::after {
+    opacity: 1;
+}
+
+/* "Brought to you by" line */
+footer p:last-child {
+    margin-top: 1rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 6px var(--neon-green);
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+    animation: pulseFooterText 3s infinite ease-in-out;
+    font-weight: bold;
+}
+
+/* Pulse animation */
+@keyframes pulseFooterText {
+    0%, 100% { opacity: 0.8; text-shadow: 0 0 6px var(--neon-purple); }
+    50% { opacity: 1; text-shadow: 0 0 14px var(--neon-cyan); }
+}
+
 /* Tablet: 2 cards */
 @media (max-width: 768px) {
     /*article.e-content {
         grid-template-columns: repeat(2, 1fr);
     }*/
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    footer .footer a {
+        display: block;
+        margin: 0.4rem 0;
+    }
 }
 
 /* Mobile: 1 card */
