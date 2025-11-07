@@ -227,6 +227,12 @@ article.e-content {
     gap: 0.6rem;
 }
 
+/* Card tag chips feel clickable */
+.project-tags .tag {
+  cursor: pointer;
+  user-select: none;
+}
+
 .tag-filter-container {
    
     margin-bottom: 2rem; /* space below the button */

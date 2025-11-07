@@ -41,6 +41,9 @@ body.lightbox-open {
     transform: scale(1.05);
 }
 
+.project-tags {
+    justify-content: center;
+}
 
 /* === Lightbox / Modal Styles === */
 #lightbox-overlay {

@@ -235,54 +235,97 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// === TAG FILTERS ===
+// === TAG FILTERS (bar buttons + per-card tags) ===
 document.addEventListener("DOMContentLoaded", () => {
-  // Only pick the filter buttons in the filter bar, not the chips inside cards
-  const tags = document.querySelectorAll(".tag-filter-container .tag");    // "2D", "3D"
+  // Top filter buttons (next to "Show All")
+  const barTags = document.querySelectorAll(".tag-filter-container .tag"); // 2D, 3D
   const showAllBtn = document.getElementById("show-all");
-  const cards = document.querySelectorAll(".project-card");
 
-  let activeTag = null;
+  // Card list (elements to show/hide)
+  const cards = Array.from(document.querySelectorAll(".project-card"));
+
+  // Tags inside cards (clicking these should also filter + highlight bar)
+  const cardTags = document.querySelectorAll(".project-card .project-tags .tag");
+
+  let activeTag = null; // "2d" | "3d" | null
+
+  const norm = (s = "") => s.trim().toLowerCase();
+
+  function clearActiveBar() {
+    barTags.forEach(btn => btn.classList.remove("active"));
+    showAllBtn.classList.remove("active");
+  }
 
   function resetCards() {
     cards.forEach(card => { card.style.display = ""; });
   }
 
-  function clearActive() {
-    tags.forEach(btn => btn.classList.remove("active"));
-    showAllBtn.classList.remove("active");
+  function applyFilter(tagName /* "2d" | "3d" */) {
+    activeTag = tagName ? norm(tagName) : null;
+
+    if (!activeTag) {
+      clearActiveBar();
+      showAllBtn.classList.add("active");
+      resetCards();
+      return;
+    }
+
+    // highlight the matching top filter button
+    clearActiveBar();
+    let matched = false;
+    barTags.forEach(btn => {
+      if (norm(btn.textContent) === activeTag) {
+        btn.classList.add("active");
+        matched = true;
+      }
+    });
+    if (!matched) {
+      // If somehow the bar doesn’t have this tag, just leave none highlighted.
+      // (Not expected here since we have 2D & 3D.)
+    }
+
+    // show/hide cards
+    cards.forEach(card => {
+      // support multiple, comma-separated data-tags
+      const raw = (card.dataset.tags || "");
+      const parts = raw.split(",").map(norm);
+      card.style.display = parts.includes(activeTag) ? "" : "none";
+    });
   }
 
-  // Wire up tag buttons
-  tags.forEach(btn => {
+  // Wire top bar buttons (2D / 3D)
+  barTags.forEach(btn => {
     btn.style.cursor = "pointer";
     btn.addEventListener("click", () => {
-      const selectedTag = btn.textContent.trim().toLowerCase(); // "2d" or "3d"
-
-      // Toggle off if clicking the same active tag
-      if (activeTag === selectedTag) {
-        activeTag = null;
-        clearActive();
-        resetCards();
-        return;
+      const tag = norm(btn.textContent);
+      // toggle the same tag off
+      if (activeTag === tag) {
+        applyFilter(null);
+      } else {
+        applyFilter(tag);
       }
-
-      activeTag = selectedTag;
-      clearActive();
-      btn.classList.add("active");
-
-      cards.forEach(card => {
-        const cardTags = (card.dataset.tags || "").toLowerCase(); // "2d" or "3d"
-        card.style.display = cardTags.includes(selectedTag) ? "" : "none";
-      });
     });
   });
 
-  // Show All
-  showAllBtn.addEventListener("click", () => {
-    activeTag = null;
-    clearActive();
-    showAllBtn.classList.add("active");
-    resetCards();
+  // Wire Show All
+  showAllBtn.addEventListener("click", () => applyFilter(null));
+
+  // Wire per-card tags (li.tag) to trigger the same filter
+  cardTags.forEach(li => {
+    li.setAttribute("role", "button");
+    li.setAttribute("tabindex", "0");
+    li.style.cursor = "pointer";
+    li.addEventListener("click", (e) => {
+      e.stopPropagation(); // don’t bubble into figure/img clicks
+      applyFilter(norm(li.textContent));
+      // Optional: scroll back to the top filters so users see the highlight
+      // document.querySelector(".tag-filter-container")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    li.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        li.click();
+      }
+    });
   });
 });
