@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
 
-  // --- 2. Power-on flick fade-up for content sections ---
-  // Add .fade-section to sections you want animated
+  // Power-on flick fade-up for content sections, verry cool. Tony Stark vibes
+  // Trying to add .fade-section to sections animated
   gsap.utils.toArray(".fade-section").forEach(section => {
     const tl = gsap.timeline({
       scrollTrigger: {
