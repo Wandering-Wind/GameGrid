@@ -1,9 +1,9 @@
-// Scripts/gsap_logo.js
+//Cool Typewrite finallyyyy works
 (() => {
   if (!window.gsap) return;
   const { gsap } = window;
 
-  // Tuning knobs (slow + readable)
+  // Tuning letter (slow + readable)
   const TYPE_STAGGER = 0.16;   // time between each typed char
   const TYPE_DUR     = 0.10;   // per-char tween duration
   const ERASE_STAGGER= 0.12;   // time between each erased char
@@ -79,8 +79,6 @@
 
     // Short pause before re-type
     tl.to({}, { duration: PAUSE_AFTER_ERASE });
-
-    // Optional: pause-on-hover (handy if users want to read nav calmly)
     el.addEventListener("mouseenter", () => tl.pause());
     el.addEventListener("mouseleave", () => tl.play());
   }
