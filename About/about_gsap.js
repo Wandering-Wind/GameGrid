@@ -1,107 +1,3 @@
-/*(() => {
-  if (!window.gsap) return;
-  const { gsap, ScrollTrigger } = window;
-  gsap.registerPlugin(ScrollTrigger);
-
-  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // ---------- 1) Hero "About Me" card: premium entrance ----------
-  function buildAboutCardIn() {
-    const card = document.querySelector(".about-card");
-    if (!card || card.dataset.fxBuilt) return;
-    card.dataset.fxBuilt = "1";
-
-    if (prefersReduced) {
-      gsap.set(card, { opacity: 1, y: 0, scale: 1, filter: "none" });
-      return;
-    }
-
-    gsap.fromTo(card,
-      { opacity: 0, y: 40, scale: 0.98, filter: "blur(6px) brightness(0.8)" },
-      {
-        opacity: 1, y: 0, scale: 1, filter: "blur(0px) brightness(1)",
-        duration: 0.9, ease: "power3.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 75%",
-          once: true
-        },
-        onComplete() {
-          // tiny neon “kick”
-          gsap.to(card, {
-            duration: 0.12,
-            filter: "brightness(1.18)",
-            yoyo: true, repeat: 1, ease: "power1.inOut"
-          });
-        }
-      }
-    );
-  }
-
-  // ---------- 2) Avatar: gentle float + parallax tilt ----------
-  function buildAvatarFloat() {
-    const img = document.querySelector(".about-card .u-photo");
-    if (!img || img.dataset.fxBuilt) return;
-    img.dataset.fxBuilt = "1";
-
-    if (prefersReduced) return;
-
-    // idle float
-    gsap.to(img, {
-      y: -6, rotate: 0.5,
-      duration: 3.2, ease: "sine.inOut", yoyo: true, repeat: -1
-    });
-
-    // parallax tilt on hover/move
-    const wrap = img.closest(".about-card");
-    let mx = 0, my = 0;
-    const handler = (e) => {
-      const r = wrap.getBoundingClientRect();
-      mx = ((e.clientX - r.left) / r.width - 0.5) * 2; // -1..1
-      my = ((e.clientY - r.top) / r.height - 0.5) * 2;
-      gsap.to(img, { rotateX: my * -6, rotateY: mx * 6, transformPerspective: 700, transformOrigin: "center" , duration: 0.25 });
-    };
-    wrap.addEventListener("mousemove", handler);
-    wrap.addEventListener("mouseleave", () => gsap.to(img, { rotateX: 0, rotateY: 0, duration: 0.35, ease: "power2.out" }));
-  }
-
-  // ---------- 3) “Contact Me” title: neon sweep underline ----------
-  // (No plugin required; a simple gradient shimmer + scale pop)
-  function buildContactNeon() {
-    const h2 = document.querySelector(".contact-wrapper h2");
-    if (!h2 || h2.dataset.fxBuilt) return;
-    h2.dataset.fxBuilt = "1";
-
-    if (prefersReduced) return;
-
-    // wrap & bar
-    const wrap = document.createElement("span");
-    wrap.className = "gg-contact-wrap";
-    h2.replaceChildren(wrap);
-    wrap.textContent = h2.textContent || "Contact Me";
-
-    const bar = document.createElement("span");
-    bar.className = "gg-contact-bar";
-    h2.appendChild(bar);
-
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: h2, start: "top 85%", once: true }
-    });
-    tl.fromTo(h2, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" })
-      .fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "back.out(1.6)" }, "-=0.2")
-      .to(bar, { "--ggShimmerX": "120%", duration: 1.2, ease: "power2.inOut" }, "-=0.25");
-  }
-
-  // ---------- Init ----------
-  document.addEventListener("DOMContentLoaded", () => {
-    buildAboutCardIn();
-    buildAvatarFloat();
-    buildContactNeon();
-  });
-})();
-*/
-
-// about_gsap.js
 (() => {
   if (!window.gsap) return;
   const { gsap, ScrollTrigger } = window;
@@ -110,7 +6,7 @@
 
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---------- 1) Hero "About Me" card: premium entrance ----------
+  //Hero "About Me" card entrance
   function buildAboutCardIn() {
     const card = document.querySelector(".about-card");
     if (!card || card.dataset.fxBuilt) return;
@@ -137,14 +33,14 @@
     );
   }
 
-  // ---------- 2) Avatar: float → flip → float (loop) + parallax tilt ----------
+  //Avatar card flip thing, finally works
   function buildAvatarFloat() {
   const img = document.querySelector(".about-card .u-photo");
   if (!img || img.dataset.fxBuilt) return;
   img.dataset.fxBuilt = "1";
   if (prefersReduced) return;
 
-  // --- wrap the image in a 3D container so flip & tilt don't clash ---
+  //note for the future: wrap the image in a 3D container so flip & tilt don't clash
   let wrap = img.parentElement?.classList.contains("avatar-3d")
     ? img.parentElement
     : null;
@@ -156,7 +52,7 @@
     wrap.appendChild(img);
   }
 
-  // Base micro wobble on the IMAGE (not the wrapper)
+  // Base micro float/wobble thing on the IMAGE (note: not the wrapper)
   gsap.to(img, {
     rotationZ: 0.6,
     duration: 4,
@@ -165,7 +61,7 @@
     repeat: -1
   });
 
-  // Float → card flip → float (loop) ON THE WRAPPER
+  // Flip loop ON THE WRAPPER!!!
   const tl = gsap.timeline({
     repeat: -1,
     repeatDelay: 0.5,
@@ -178,7 +74,7 @@
     .to(wrap, { y: -8, duration: 1.6 })
     .to(wrap, { y: 0,  duration: 1.6 });
 
-  // Card-like spin: add a tiny Z pop so the perspective reads
+  // Card-like spin: added a tiny Z pop so the perspective reads
   tl.to(wrap, {
     rotateY: "+=180",
     z: 18,
@@ -193,7 +89,7 @@
     ease: "power2.out"
   }, ">-0.02");
 
-  // --- parallax tilt ON THE IMAGE so it composes with wrapper flip ---
+  // tried a parallax tilt ON THE IMAGE so it composes with wrapper flip
   const card = img.closest(".about-card");
   const onMove = (e) => {
     const r = card.getBoundingClientRect();
@@ -214,7 +110,7 @@
   );
 }
 
-  // ---------- 3) Contact title: SVG neon arc + orb MotionPath ----------
+  //Contact title: SVG neon arc + orb MotionPath
   function buildContactNeon() {
     const h2 = document.querySelector(".contact-wrapper h2");
     if (!h2 || h2.dataset.fxBuilt) return;
@@ -222,7 +118,7 @@
 
     if (prefersReduced) return;
 
-    // Wrap text so we can size the SVG to the text width
+    // Wrapped text so we can size the SVG to the text width
     const text = h2.textContent || "Contact Me";
     h2.textContent = "";
 
@@ -231,7 +127,7 @@
     label.textContent = text;
     h2.appendChild(label);
 
-    // Build SVG under the label
+    // Building SVG under the label
     const svgNS = "http://www.w3.org/2000/svg";
     const svg  = document.createElementNS(svgNS, "svg");
     svg.classList.add("gg-contact-svg");
@@ -312,8 +208,7 @@
         .to(orb, { opacity: 0, duration: 0.25 }, "-=0.05");
     }
 
-    // Optional subtle loop after the intro (re-draw and re-ride occasionally)
-    // Comment out this block if you want it to run only once.
+    //A subtle loop after the intro (re-draw and re-ride occasionally)
     const loop = gsap.timeline({ repeat: -1, repeatDelay: 2.2, defaults: { ease: "power2.out" } });
     loop.set(path, { strokeDashoffset: length });
     loop.to(path, { strokeDashoffset: 0, duration: 0.9 });
@@ -328,11 +223,11 @@
           .to(orb, { opacity: 0, duration: 0.25 }, "-=0.05");
     }
 
-    // Respect reduced motion: stop the loop if user prefers
+    // Respect reduced motion: stop the loop if user prefers. Apparently it's good because motion can be too much
     if (prefersReduced) loop.pause(0);
   }
 
-  // ---------- Init ----------
+  //Init
   document.addEventListener("DOMContentLoaded", () => {
     buildAboutCardIn();
     buildAvatarFloat();
