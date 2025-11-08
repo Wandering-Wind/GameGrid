@@ -344,3 +344,51 @@
 @media (max-width: 520px) {
   .gg-contact-svg { height: 22px; }
 }
+
+/*Fixing the overflow on mobile issue*/
+/* Include this on every project */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Media-safe media */
+img, svg, canvas, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*Clamp paddings so they don't blow up proportion on phones */
+.about-wrapper,
+.contact-wrapper,
+.about-card,
+.contact-form {
+  padding-inline: clamp(12px, 4vw, 32px);
+}
+
+/* Ensuring containers can’t be wider than the viewport */
+.Project-Container {
+  width: min(100%, 1100px);
+  margin-inline: auto;
+}
+
+/* Single column on phones (just trynna keep it tight) */
+@media (max-width: 900px) {
+  .Project-Container { grid-template-columns: 1fr; }
+  .about-card,
+  .contact-wrapper { height: auto; }
+}
+
+/* Inputs at 100% without overflowing because of padding/border */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Cap the decorative underline SVG so it never exceeds its container */
+.gg-contact-svg {
+  width: 100% !important;   
+  max-width: 600px;        
+  display: block;
+  margin-inline: auto;
+}
