@@ -6,10 +6,8 @@
     --neon-magenta: #dd00ff;
 }
 
-
 /* === Art Page Specific Styles === */
-
-/* Center all text inside project cards */
+/* Centering all text inside project cards */
 .project-card {
     text-align: center;
 }
@@ -20,7 +18,7 @@ body, html {
     height: 100%;
 }
 
-/* Lock page when lightbox is open (prevents background jump on mobile) */
+/* Lock page when lightbox is open (trying to prevent background jump on mobile) */
 body.lightbox-open {
   overflow: hidden;
   overscroll-behavior: contain;
@@ -31,7 +29,7 @@ body.lightbox-open {
 .project-card img.responsive-img {
     width: 100%;
     height: 250px; /* fixed height for uniformity */
-    object-fit: cover; /* ensures the image fills the box without stretching */
+    object-fit: cover; /* ensures the image fills the box without stretching, so important for future reference */
     cursor: pointer; /* indicate clickable */
     transition: transform 0.3s ease;
 }
@@ -45,22 +43,8 @@ body.lightbox-open {
     justify-content: center;
 }
 
-/* === Lightbox / Modal Styles === */
+/* === Lightbox/ Gallery mode === */
 #lightbox-overlay {
-    /*
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;*/
-    
-
-    
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 70, 0.9);
@@ -90,7 +74,7 @@ body.lightbox-open {
     box-shadow: 0 0 25px var(--neon-green), 0 0 50px rgba(0, 255, 255, 0.6);
 }
 
-/* === Neon Styled Buttons === */
+/* === Neon Styled Gallery mode Buttons === */
 .lightbox-btn,
 #close-btn {
   position: absolute;
@@ -102,9 +86,6 @@ body.lightbox-open {
   cursor: pointer;
   transition: 0.25s ease;
   font-family: "Orbitron", sans-serif;
-
-  /* Scale size with viewport; feels right on phone + desktop */
-  /* Arrows: font-size ~24–36px, Close: ~18–28px (set below) */
 }
 
 /* Hover glow */
@@ -119,7 +100,7 @@ body.lightbox-open {
 .lightbox-btn {
   top: 50%;
   transform: translateY(-50%);
-  /* Font + padding scale with viewport, but are clamped for sanity */
+  /* Font + padding scale with viewport, but are clamped for my sanity please*/
   font-size: clamp(1.4rem, 1rem + 1.2vw, 2.25rem);
   padding: clamp(0.25rem, 0.2rem + 0.8vw, 0.7rem)
            clamp(0.6rem, 0.4rem + 1vw, 1rem);
@@ -147,17 +128,17 @@ body.lightbox-open {
     overflow: hidden;
 }
 
-/* --- Trying to restore the HUD scanlines onto this page --- */
+/* Trying to restore the HUD scanlines onto this page*/
 /* Painting the full HUD background (scanlines + mists) directly on the page root */
 html {
   background:
-    /* 1) scanlines */
+    /*scanlines */
     repeating-linear-gradient(
       to bottom,
       rgba(0, 255, 255, 0.02) 0 2px,
       transparent 2px 4px
     ),
-    /* 2) neon mists (same as main.css) */
+    /*neon mists */
     radial-gradient(circle at 30% 20%, rgba(0, 136, 255, 0.15), transparent 60%),
     radial-gradient(circle at 70% 80%, rgba(112, 0, 192, 0.15), transparent 60%),
     #02030a;
@@ -165,7 +146,7 @@ html {
   background-size: auto, cover, cover, auto;
 }
 
-/* Keep the existing body styles from main.css, but trynna ensure it doesn't override */
+/* Keeping the existing body styles from main.css, but trynna ensure it doesn't override */
 body {
   background: transparent !important;
 }
@@ -180,7 +161,7 @@ body {
   }
 }
 
-/* Reduce glow/ink on mobile to avoid visual clutter */
+/* Reduce glow on mobile to avoid visual clutter */
 @media (max-width: 600px) {
   .lightbox-btn,
   #close-btn {
@@ -190,7 +171,7 @@ body {
   }
 }
 
-/* Respect reduced motion */
+/* Respect reduced motion, it do be like that*/
 @media (prefers-reduced-motion: reduce) {
   .lightbox-btn,
   #close-btn {
