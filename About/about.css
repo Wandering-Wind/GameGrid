@@ -48,6 +48,30 @@
     margin-bottom: 1.2rem;
 }
 
+/* Make About + Form sit in a 2-col grid with equal heights */
+.Project-Container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: stretch; /* stretch both cards to same height */
+}
+
+/* Let the inner wrappers stretch instead of capping width */
+.about-wrapper,
+.contact-wrapper {
+  max-width: 100%;
+  margin: 0;       /* remove auto-centering so items fill the grid cell */
+  height: 100%;    /* fill the grid cell height */
+}
+
+/* Make the cards fill their cells and layout nicely */
+.about-card,
+.contact-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Subtle floating animation */
 .u-photo {
     animation: floatPulse 4s ease-in-out infinite alternate;
@@ -215,6 +239,23 @@
     background: rgba(0, 255, 132, 0.15);
     border: 1px solid #00ff84;
     color: #00ff9d;
+}
+
+@media (max-width: 900px) {
+  .Project-Container {
+    grid-template-columns: 1fr; /* stack */
+  }
+  .about-card,
+  .contact-wrapper {
+    height: auto; /* allow natural height when stacked */
+  }
+
+  /* Let the avatar shrink a bit more on phones */
+  .about-card .u-photo {
+    width: clamp(120px, 45vw, 200px);
+    height: auto;          /* paired with aspect-ratio keeps it square */
+    aspect-ratio: 1 / 1;
+  }
 }
 
 @keyframes fadeIn {
