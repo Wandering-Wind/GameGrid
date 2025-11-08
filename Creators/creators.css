@@ -7,8 +7,7 @@
 }
 
 /* === CREATORS PAGE STYLING === */
-/* Builds on the main.css aesthetic */
-
+/* Building on the main.css aesthetic */
 html {
   scroll-behavior: smooth;
 }
@@ -102,14 +101,6 @@ html {
     border-bottom: 1px solid rgba(112, 0, 192, 0.4);
     padding-bottom: 0.3rem;
 }
-
-/* === Hover animation for the entire card === 
-.project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 16px var(--neon-cyan), 0 0 30px var(--neon-purple);
-    transition: 0.3s ease;
-}
-    */
 
 /* === Responsive adjustments === */
 @media (max-width: 600px) {
