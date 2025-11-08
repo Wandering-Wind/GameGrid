@@ -1,5 +1,4 @@
 /* === ABOUT PAGE STYLES === */
-
 :root {
     --neon-cyan: #0088ff;
     --neon-purple: #7000c0;
@@ -28,13 +27,13 @@
         inset 0 0 18px rgba(0, 255, 255, 0.12);
     transition: 0.3s ease;
 
-    display: flex;            /* you already have this */
-    flex-direction: column;   /* you already have this */
-    align-items: center;      /* <- center image + headings + meta */
+    display: flex;            
+    flex-direction: column;   
+    align-items: center;      
     text-align: center;       /* keep text centered */
 }
 
-/* Hover pulse like HUD card */
+/* Hover pulse like HUD card (Jarvis vibe)*/
 .about-card:hover {
     box-shadow: 0 0 16px var(--neon-blue), 0 0 40px var(--neon-purple);
     transform: translateY(-4px);
@@ -59,7 +58,7 @@
     display: block;
 }
 
-/* Make About + Form sit in a 2-col grid with equal heights */
+/* Make About + Form sit in a 2-col grid with equal heights to use space better*/
 .Project-Container {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -72,10 +71,9 @@
 .contact-wrapper {
   max-width: 100%;
   margin: 0;       /* remove auto-centering so items fill the grid cell */
-  height: 100%;    /* fill the grid cell height */
+  height: 100%;    
 }
 
-/* Make the cards fill their cells and layout nicely */
 .about-card,
 .contact-wrapper {
   height: 100%;
@@ -126,7 +124,6 @@
 }
 
 /* === CONTACT FORM STYLES === */
-
 .contact-section {
     margin-top: 4rem;
 }
@@ -205,32 +202,6 @@
     box-shadow: 0 0 20px var(--neon-magenta);
 }
 
-/*#form-status {
-    margin-top: 1rem;
-    padding: 0.8rem;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 1rem;
-    display: none;
-}
-
- Success glow 
-#form-status.success {
-    color: var(--neon-green);
-    border: 1px solid var(--neon-green);
-    text-shadow: 0 0 8px var(--neon-green);
-    box-shadow: 0 0 10px var(--neon-green);
-}
-
-/* Error glow 
-#form-status.error {
-    color: #ff3e7f;
-    border: 1px solid #ff3e7f;
-    text-shadow: 0 0 8px #ff3e7f;
-    box-shadow: 0 0 10px #ff3e7f;
-}
-*/
-
 #form-status {
     margin-top: 1rem;
     padding: .75rem 1rem;
@@ -275,14 +246,14 @@
 }
 
 /*=== GSAP for about ===*>
-/* 1) About card base (keeps your existing card look) */
+/*About card base (keeps existing card look) */
 .about-card { 
     position: relative; 
     will-change: transform, 
     filter, opacity; 
 }
 
-/* 2) Avatar tilt keeps perspective readable */
+/*Avatar flip keeps perspective readable */
 .about-card { transform-style: preserve-3d; perspective: 900px; }
 .about-card .u-photo { 
     display:block; 
@@ -298,10 +269,10 @@
   backface-visibility: hidden;
   will-change: transform;
 }
-/* 3) Contact title underline + shimmer */
+/*Contact title underline + shimmer */
 .contact-wrapper h2 {
     position: relative;
-    display: block;           /* block so we can center children easily */
+    display: block;      
     text-align: center;
     margin-inline: auto;
     }
@@ -344,7 +315,7 @@
     drop-shadow(0 0 16px rgba(221,0,255,0.65))
     drop-shadow(0 0 28px rgba(0,234,255,0.45));
 }
-/* 4) Form focus glow (animated via CSS variable --fg) */
+/*Form focus glow */
 .form-group{
   --fg: 0;
   border-radius: 10px;
@@ -355,7 +326,7 @@
     inset 0 0 calc(12px * var(--fg)) rgba(0, 255, 157, .25);
 }
 
-/* 5) Submit button magnetic ring */
+/*Tried the submit button magnetic ring */
 .contact-btn{
   position: relative; overflow: hidden; transform: translateZ(0);
 }
@@ -365,11 +336,11 @@
   box-shadow: 0 0 12px var(--neon-cyan);
 }
 
-/* --- Avatar perspective keeps flips readable --- */
+/*Avatar perspective keeping flips readable*/
 .about-card { transform-style: preserve-3d; perspective: 900px; }
 .about-card .u-photo { transform-origin: 50% 50%; will-change: transform; }
 
-/* Optional: slightly larger path on small screens for legibility */
+/* Slightly larger path on small screens for legibility*/
 @media (max-width: 520px) {
   .gg-contact-svg { height: 22px; }
 }
