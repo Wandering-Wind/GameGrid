@@ -5,13 +5,13 @@
     --neon-blue: #0237b4;
     --neon-magenta: #dd00ff;
 
-    /*--neon-cyan: #00eaff;
+    /*Tried with below colours, didn't like it
+    --neon-cyan: #00eaff;
     --neon-purple: #8a00ff;
     --neon-green: #00ff9d;*/
 }
 
 
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap');
 
 /* === Futuristic HUD Background === */
@@ -80,7 +80,7 @@ body::after {
   animation: activePulse 1.8s ease-in-out infinite;
 }
 
-/* Optional corner “brackets” for extra HUD vibes */
+/* Optional corner “brackets” for extra HUD vibes, please be proud of me Tony Stark */
 .nav-links a.active-link::before {
   content: "◢";
   position: absolute; left: -12px; bottom: -12px;
@@ -130,19 +130,8 @@ main {
     padding: 4rem 2rem;
 }
 
-/* PROJECT GRID LAYOUT */
-/* Page Title 
 h1.p-name, h2 {
-    font-size: 3rem;
-    text-align: center;
-    color: var(--neon-cyan);
-    margin-bottom: 3rem;
-    text-shadow: 0 0 12px var(--neon-cyan);
-}
-    */
-
-h1.p-name, h2 {
-  /* scales from phones → desktops smoothly */
+  /* scales from phones to desktops smoothly */
   font-size: clamp(1.9rem, 1.1rem + 4.2vw, 4.2rem);
   text-align: center;
   color: var(--neon-cyan);
@@ -189,14 +178,6 @@ article.e-content {
     transform: translateY(-4px) scale(1.02);
 }
 
-/* Hover boost glow 
-.project-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow:
-        0 0 20px rgba(0, 255, 255, 0.7),
-        0 0 40px rgba(112, 0, 192, 0.6);
-}*/
-
 /* Project image */
 .project-img {
     text-align: center;
@@ -238,7 +219,7 @@ article.e-content {
     gap: 0.6rem;
 }
 
-/* Card tag chips feel clickable */
+/* Make card tag chips feel clickable */
 .project-tags .tag {
   cursor: pointer;
   user-select: none;
@@ -254,7 +235,6 @@ article.e-content {
   padding: 0.5rem 0;
 }
 
-/* Base pill styles (Show All + Tag buttons) */
 .tag,
 .show-all {
   cursor: pointer;
@@ -266,8 +246,7 @@ article.e-content {
   text-transform: none;
   letter-spacing: 0.4px;
 
-  /* Responsive size:
-     min 0.95rem, scales with viewport, caps at 1.15rem */
+  /* Responsive size:*/
   font-size: clamp(0.95rem, 0.6rem + 1vw, 1.15rem);
 
   /* Responsive padding:
@@ -275,11 +254,11 @@ article.e-content {
   padding: clamp(0.5rem, 0.35rem + 0.8vw, 0.8rem)
            clamp(0.9rem, 0.6rem + 1.2vw, 1.4rem);
 
-  min-height: 44px;               /* a11y tap target */
-  border-radius: 10px;           /* pill look */
+  min-height: 44px;              
+  border-radius: 10px;          
   line-height: 1;
 
-  /* Your existing neon look, kept intact */
+  /* Existing neon look, keeping it intact */
   border: 1px solid var(--neon-magenta);
   color: var(--neon-magenta);
   background: rgba(221, 0, 255, 0.08);
@@ -290,7 +269,7 @@ article.e-content {
   transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
   
-  /* Trying to center the label inside the pill */
+  /* Trying to center the label inside the tags */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -299,10 +278,10 @@ article.e-content {
   box-sizing: border-box;
   text-align: center;
   white-space: nowrap;   /* keeps “Portfolio Project” from breaking mid-word */
-  line-height: 1;        /* you already had this; good to keep */
+  line-height: 1; 
 }
 
-/* Hover — invert colours neon style (kept) + tiny lift */
+/* Hover- invert colours neon style (kept) + tiny lift */
 .tag:hover,
 .show-all:hover {
   background: var(--neon-magenta);
@@ -311,7 +290,7 @@ article.e-content {
   transform: translateY(-1px);
 }
 
-/* Active/selected state — brighter and greener to match your theme */
+/* Active/selected state- brighter and greener to match the theme */
 .tag.active,
 .show-all.active {
   background: rgba(112, 0, 192, 0.45);
@@ -364,7 +343,7 @@ article.e-content {
     inset 0 0 14px rgba(0, 255, 255, 0.18);
   backdrop-filter: blur(6px) saturate(160%);
   -webkit-backdrop-filter: blur(6px) saturate(160%);
-  display: none;                  /* <- your methodology toggles this */
+  display: none;                  /* toggles */
   place-items: center;
   cursor: pointer;
   z-index: 10000;
@@ -486,9 +465,6 @@ footer p:last-child {
 
 /* Tablet: 2 cards */
 @media (max-width: 768px) {
-    /*article.e-content {
-        grid-template-columns: repeat(2, 1fr);
-    }*/
     .tag,
     .show-all {
         font-size: clamp(0.95rem, 0.7rem + 0.8vw, 1.05rem);
@@ -512,16 +488,12 @@ footer p:last-child {
     .show-all {
         font-size: clamp(0.95rem, 0.85rem + 0.6vw, 1rem);
         padding: 0.55rem 1rem;
-        min-height: 44px; /* keep tap target */
+        min-height: 44px; /* keeping tap target */
     }
 }
 
 /* Mobile: 1 card */
 @media(max-width: 480px) {
-
-    /*article.e-content {
-        grid-template-columns: repeat(1, 1fr);
-    }*/
 
     .menu-btn {
         display: block;
@@ -585,7 +557,7 @@ footer p:last-child {
 /* Give the container a bit of depth so the 3D tilt reads nicely */
 .Project-Container { perspective: 800px; }
 
-/* Cards are animated a lot—opt in to GPU-friendly transforms */
+/* Cards are animated a lot—opt in to less GPU heavy transforms */
 .project-card {
   will-change: transform, opacity, filter;
   transform-style: preserve-3d;
@@ -609,7 +581,7 @@ h1.p-name {
   margin: 0.75rem auto 0.25rem;  /* center horizontally */
 }
 
-/* Type line + characters (unchanged semantics) */
+/* Type line + characters */
 /* Center title text */
 h1.p-name { text-align: center; margin-inline: auto; }
 
@@ -657,7 +629,7 @@ h1.p-name { text-align: center; margin-inline: auto; }
   opacity: 0;
 }
 
-/* --- Logo Typewriter --- */
+/* --- Logo Typewriter (coolest shii ever)--- */
 .nav .logo {
   display: inline-flex;
   align-items: center;
