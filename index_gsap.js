@@ -1,11 +1,11 @@
-// /Scripts/home_gsap.js
+//Landing Page tings
 (() => {
   if (!window.gsap) return;
   const { gsap, ScrollTrigger } = window;
   gsap.registerPlugin(ScrollTrigger);
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---- 1) Project cards: intro + hover tilt/bob
+  //Project cards: intro + hover tilt/bob
   function cardsIntro() {
     const cards = gsap.utils.toArray(".carousel-slide, .project-card");
     if (!cards.length) return;
@@ -60,7 +60,7 @@
   }
 
 
-  // ---- 3) Neon scroll progress bar (top HUD feel)
+  //Tried a neon scroll progress bar (top HUD feel)
   function scrollProgress() {
     let bar = document.querySelector(".gg-progress");
     if (!bar) {
@@ -79,7 +79,7 @@
     });
   }
 
-  // ---- 4) "Game Search" title: SVG underline + orb rider (optional)
+  // Tried "Game Search" title: SVG underline + orb rider
   function searchHeadingUnderline() {
     const h2 = document.querySelector('.API h2');
     if (!h2 || h2.dataset.fxBuilt) return;
