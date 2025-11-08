@@ -85,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const parts = parseTags(card.dataset.tags || "");
       card.style.display = parts.includes(activeTag) ? "" : "none";
     });
+
+    window.sharedAnims?.refresh();
   }
 
   // Clicks on top filter buttons
