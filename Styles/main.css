@@ -608,3 +608,36 @@ h1.p-name { text-align: center; margin-inline: auto; }
     drop-shadow(0 0 28px rgba(0, 234, 255, 0.45));
   opacity: 0;
 }
+
+/* --- Logo Typewriter --- */
+.nav .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;                 /* tiny space before caret */
+  white-space: nowrap;
+  font-family: 'Audiowide', sans-serif;
+  /* responsive but subtle so the navbar doesn't jump */
+  font-size: clamp(1.1rem, 0.8rem + 1.2vw, 1.8rem);
+  letter-spacing: clamp(0.5px, 0.1vw, 1.2px);
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.gg-logo-line { display: inline-block; }
+.gg-logo-char {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+.gg-logo-caret {
+  display: inline-block;
+  width: 0.5ch;
+  margin-left: 2px;
+  border-left: 2px solid var(--neon-cyan);
+  filter: drop-shadow(0 0 4px var(--neon-cyan)) drop-shadow(0 0 10px rgba(0, 234, 255, 0.5));
+  opacity: 0.9;
+  animation: ggLogoBlink 1s steps(1, end) infinite;
+}
+@keyframes ggLogoBlink {
+  0%, 49% { opacity: 1; }
+  50%,100% { opacity: 0; }
+}
