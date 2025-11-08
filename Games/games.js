@@ -76,6 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const parts = raw.split(",").map(norm); // e.g. "game jam, group project"
       card.style.display = parts.includes(activeTag) ? "" : "none";
     });
+
+    window.sharedAnims?.refresh();
   }
 
   // Clicks on top filter buttons
@@ -120,3 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+
+//GSAP stuffs

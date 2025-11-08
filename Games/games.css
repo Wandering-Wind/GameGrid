@@ -1,0 +1,18 @@
+/* GSAP rail sits behind cards and ignores clicks */
+.gsap-rail {
+  position: sticky;    /* sticks near top as you scroll the list */
+  top: 0;
+  width: 100%;
+  height: 180px;       /* tweak to taste */
+  pointer-events: none;
+  z-index: 0;
+  margin-bottom: 1rem;
+}
+
+/* Ensure cards sit above the rail */
+.Project-Container,
+article.e-content,
+.project-card {
+  position: relative;
+  z-index: 1;
+}

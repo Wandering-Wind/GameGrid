@@ -518,8 +518,19 @@ footer p:last-child {
 }
 
 /*=== gsap animation now featuring this side so I know the sections quick ===*/
-
 .fade-section {
   transition: filter 0.2s ease;
   will-change: transform, opacity, filter;
 }
+
+/* Give the container a bit of depth so the 3D tilt reads nicely */
+.Project-Container { perspective: 800px; }
+
+/* Cards are animated a lot—opt in to GPU-friendly transforms */
+.project-card {
+  will-change: transform, opacity, filter;
+  transform-style: preserve-3d;
+}
+
+/* Optional: a tiny hover lift that layers nicely with the float */
+.project-card:hover { transform: translateY(-2px) scale(1.015); }
