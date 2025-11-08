@@ -291,6 +291,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const parts = raw.split(",").map(norm);
       card.style.display = parts.includes(activeTag) ? "" : "none";
     });
+
+    window.sharedAnims?.refresh();
   }
 
   // Wire top bar buttons (2D / 3D)
