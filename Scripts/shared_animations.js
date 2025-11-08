@@ -9,7 +9,7 @@
 
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // --- Intro sequence: slide in from sides (staggered) ---
+  //Intro sequence: slide in from sides (staggered)
   function introSlideIn() {
     const cards = gsap.utils.toArray(".project-card");
     if (!cards.length) return;
@@ -47,9 +47,9 @@
 
 
   
-  // --- Ambient hover / movement (subtle drift) ---
-  // This is a simple repeating tween (NOT an SVG / motion path).
-  // Each visible card gets a tiny yoyo float; pausing on hover.
+  // Ambient hover / float (subtle drift)
+  // PS: This is a simple repeating tween (NOT an SVG / motion path).
+  // Each visible card gets a teeny tiny yoyo float; pausing on hover.
   const floatTweens = new WeakMap();
 
   function startFloat(el) {
@@ -107,7 +107,7 @@
     observeMutations();
   });
 
-  // tiny public API
+  // tiny public API, futture note: this helps refresh when filters
   window.sharedAnims = { refresh };
 })();
 
