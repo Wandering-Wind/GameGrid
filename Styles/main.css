@@ -516,3 +516,10 @@ footer p:last-child {
 .project-tags .tag {
     animation: glowPulse 2s infinite ease-in-out;
 }
+
+/*=== gsap animation now featuring this side so I know the sections quick ===*/
+
+.fade-section {
+  transition: filter 0.2s ease;
+  will-change: transform, opacity, filter;
+}
