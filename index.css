@@ -1,4 +1,4 @@
-/* === SEARCH HUD BAR === */
+/* === SEARCH HUD BAR for API=== */
 .search-box {
     display: flex;
     gap: 0.8rem;
@@ -209,7 +209,7 @@
     margin-top: 2.2rem;         /* keeps nice rhythm after the excerpt block */
     }
 
-    /* Mobile tweaks — keep everything comfortable */
+    /* Mobile tweaks - keep everything comfortable */
 @media (max-width: 640px) {
     .about-container { padding: 0 1rem; margin-bottom: 2rem; }
     .about-text { padding: 0.9rem 1rem; max-width: 90ch; }
@@ -217,7 +217,7 @@
     .featuring h2.p-name { margin-top: 1.6rem; }
     }
 
-/* --- Mobile: native scroll & hide arrows --- */
+/* Mobile: normal scroll & hide arrows */
 @media (max-width: 640px) {
   .carousel-container {
     overflow: auto;                 /* allow finger scroll */
@@ -238,7 +238,7 @@
 
 /*=== GSAP for the homepage ===*/
 
-/* Card GPU-friendly */
+/* Card*/
 .project-card, .carousel-slide { transform-style: preserve-3d; will-change: transform, filter, opacity; }
 
 /* Neon scroll progress bar */

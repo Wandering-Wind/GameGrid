@@ -5,7 +5,7 @@ const prevBtn = document.querySelector('.prev');
 
 let slides = Array.from(track.children);
 
-// --- Clone ends for infinite loop
+//Clone ends for infinite loop
 const firstClone = slides[0].cloneNode(true);
 const lastClone  = slides[slides.length - 1].cloneNode(true);
 firstClone.classList.add('clone');
@@ -19,12 +19,12 @@ let index = 1;        // start at first real slide
 let interval = null;
 let centers = [];     // centers of slides relative to track left (px)
 
-// Compute centers of each slide
+// centers of each slide
 function computeCenters() {
   centers = slides.map(el => el.offsetLeft + el.offsetWidth / 2);
 }
 
-// Translate so active slide is centered in container
+// move so active slide is centered in container
 function goToIndex(i, animate = true) {
   index = i;
   const containerCenter = container.clientWidth / 2;
@@ -48,18 +48,18 @@ function prevSlide() {
   goToIndex(index - 1, true);
 }
 
-// Handle infinite jump (no animation)
+// handling the infinite jump (no animation)
 track.addEventListener('transitionend', () => {
   if (slides[index].classList.contains('clone')) {
-    if (index === slides.length - 1) index = 1;              // jumped past lastClone
-    if (index === 0) index = slides.length - 2;              // jumped before last real
+    if (index === slides.length - 1) index = 1;              
+    if (index === 0) index = slides.length - 2;              
     goToIndex(index, false);
   }
 });
 
 // Autoplay (desktop)
 function startAuto() {
-  // Skip autoplay on small screens (native scroll UX)
+  // Skip autoplay on small screens 
   if (window.matchMedia('(max-width: 640px)').matches) return;
   stopAuto();
   interval = setInterval(nextSlide, 3000);
@@ -81,7 +81,7 @@ track.addEventListener('mouseleave', startAuto);
 if (nextBtn) nextBtn.addEventListener('click', () => { stopAuto(); nextSlide(); startAuto(); });
 if (prevBtn) prevBtn.addEventListener('click', () => { stopAuto(); prevSlide(); startAuto(); });
 
-// Recompute on resize (slides may change width)
+// respond on resize (slides may change width)
 window.addEventListener('resize', () => {
   const wasAnimating = !!interval;
   track.style.transition = 'none';
@@ -99,7 +99,7 @@ startAuto();
 //API
 const API_KEY = "6f2d429c52d0421c849d7b80eccebe03";
 
-// Convert rating (e.g. 4.2) to stars ★★★★☆
+// Convert rating (e.g. 4.2) to stars
 function starRating(rating) {
     const stars = Math.round(rating);
     return "★".repeat(stars) + "☆".repeat(5 - stars);
