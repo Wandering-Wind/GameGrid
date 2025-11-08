@@ -158,7 +158,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     cardsIntro();
-    carouselAmbient();
+    if (typeof carouselAmbient === "function") carouselAmbient(); // <- guard
     scrollProgress();
     searchHeadingUnderline();
   });
