@@ -557,7 +557,7 @@ footer p:last-child {
 /* Give the container a bit of depth so the 3D tilt reads nicely */
 .Project-Container { perspective: 800px; }
 
-/* Cards are animated a lot—opt in to less GPU heavy transforms */
+/* Cards are animated a lo-opt in to less GPU heavy transforms */
 .project-card {
   will-change: transform, opacity, filter;
   transform-style: preserve-3d;
