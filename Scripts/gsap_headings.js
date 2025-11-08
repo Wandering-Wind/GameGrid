@@ -108,14 +108,44 @@
 
     wrap.appendChild(svg);
 
-    // --- center & size underline based on real h1 width ---
+
+   // --- center & size underline based on real h1 width ---
     function sizeUnderline() {
-      const W = heading.getBoundingClientRect().width || 480;
-      const target = Math.min(W * 1.25, 900); // extend a bit past the text
-      svg.style.width = `${target}px`;
-      svg.style.marginLeft = "auto";
-      svg.style.marginRight = "auto";
+    // width after fonts/wrapping/layout
+    const w = Math.max(heading.offsetWidth, heading.getBoundingClientRect().width, 0);
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+
+    // a bit wider than text, clamped to viewport & sane bounds
+    const target = Math.max(220, Math.min(w * 1.20, vw * 0.86, 1000));
+    svg.style.width = `${Math.round(target)}px`;
+    svg.style.marginLeft = "auto";
+    svg.style.marginRight = "auto";
     }
+
+    // run once
+    sizeUnderline();
+
+    // re-run when fonts finish loading (width can change after swap)
+    if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(sizeUnderline).catch(()=>{});
+    }
+
+    // throttle helper to avoid jank on rapid resizes
+    let pending = false;
+    const ask = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => { pending = false; sizeUnderline(); });
+    };
+
+// re-run on viewport changes
+window.addEventListener("resize", ask);
+window.addEventListener("orientationchange", ask);
+
+// observe layout width changes on the heading/wrapper (wrapping, CSS changes, nav injection, etc.)
+const ro = new ResizeObserver(ask);
+ro.observe(heading);
+ro.observe(wrap);
     sizeUnderline();
     window.addEventListener("resize", sizeUnderline);
 
