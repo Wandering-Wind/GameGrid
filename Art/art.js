@@ -1,134 +1,3 @@
-/*document.addEventListener("DOMContentLoaded", () => {
-    const images = document.querySelectorAll('.project-card img');
-    const overlay = document.getElementById('lightbox-overlay');
-    const lightboxImg = overlay.querySelector('img');
-    const closeBtn = document.getElementById('close-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const prevBtn = document.getElementById('prev-btn');
-
-    let currentIndex = 0;
-    const imageArray = Array.from(images);
-
-    function showLightbox(index) {
-        const img = imageArray[index];
-        lightboxImg.src = img.src;
-        overlay.style.display = 'flex';
-        currentIndex = index;
-    }
-
-    images.forEach((img, idx) => {
-        img.addEventListener('click', () => showLightbox(idx));
-    });
-
-    closeBtn.addEventListener('click', () => overlay.style.display = 'none');
-
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % imageArray.length;
-        lightboxImg.src = imageArray[currentIndex].src;
-    });
-
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + imageArray.length) % imageArray.length;
-        lightboxImg.src = imageArray[currentIndex].src;
-    });
-
-    // Close lightbox on clicking overlay (except image)
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) overlay.style.display = 'none';
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (overlay.style.display === 'flex') {
-            if (e.key === 'ArrowRight') nextBtn.click();
-            if (e.key === 'ArrowLeft') prevBtn.click();
-            if (e.key === 'Escape') overlay.style.display = 'none';
-        }
-    });
-});
-
-
-
-
-//Fixes the issue of where the image is only visible at the top in gallery mode
-document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll('.project-card img');
-  const overlay = document.getElementById('lightbox-overlay');
-  const lightboxImg = overlay.querySelector('img');
-  const closeBtn = document.getElementById('close-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const prevBtn = document.getElementById('prev-btn');
-
-  let currentIndex = 0;
-  const imageArray = Array.from(images);
-
-  function openLightbox(index) {
-    currentIndex = index;
-    lightboxImg.src = imageArray[currentIndex].src;
-    overlay.style.display = 'flex';
-    document.body.classList.add('lightbox-open');
-
-    // Focus the modal for key handling + some mobile browsers
-    overlay.focus();
-
-    // Belt-and-suspenders: if some browser paints it “up top”, yank view to top
-    // (Fixed-position overlay should cover the viewport anyway, but this ensures visibility.)
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  }
-
-  function closeLightbox() {
-    overlay.style.display = 'none';
-    document.body.classList.remove('lightbox-open');
-  }
-
-  images.forEach((img, idx) => {
-    img.addEventListener('click', () => openLightbox(idx));
-  });
-
-  closeBtn.addEventListener('click', closeLightbox);
-
-  nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % imageArray.length;
-    lightboxImg.src = imageArray[currentIndex].src;
-  });
-
-  prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + imageArray.length) % imageArray.length;
-    lightboxImg.src = imageArray[currentIndex].src;
-  });
-
-  // Close on overlay click (but not when clicking the image or buttons)
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeLightbox();
-  });
-
-  // Keyboard navigation when overlay is open
-  document.addEventListener('keydown', (e) => {
-    if (overlay.style.display === 'flex') {
-      if (e.key === 'ArrowRight') nextBtn.click();
-      if (e.key === 'ArrowLeft')  prevBtn.click();
-      if (e.key === 'Escape')     closeLightbox();
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const tags = document.querySelectorAll(".tag");
-    const cards = document.querySelectorAll(".project-card");
-    const showAllBtn = document.getElementById("show-all");
-    let activeTag = null;
-
-    function resetCards() {
-        cards.forEach(card => card.style.display = "");
-    }
-
-    function clearActive() {
-        tags.forEach(tag => tag.classList.remove("active"));
-        showAllBtn.classList.remove("active");
-    }
-
-*/
-
 //Allows for the videos to play too! And it works!! Good stuff!
 document.addEventListener("DOMContentLoaded", () => {
   const thumbs = document.querySelectorAll('.project-card img');
@@ -138,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.getElementById('prev-btn');
   const content = document.getElementById('lightbox-content');
 
-  // Build a media list (image or video)
+  // Building a media list (image or video)
   const items = Array.from(thumbs).map(img => {
     const videoSrc = img.dataset.video;
     return {
@@ -166,11 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
       video.controls = true;
       video.autoplay = true;          // user initiated (click), usually OK
       video.muted = true;             // improves autoplay reliability across browsers
-      video.loop = true;              // optional, looks nice for turntables
+      video.loop = true;              // makes turntables look better
       video.playsInline = true;       // iOS full-screen prevention, psshtt Apple has to be different heyy
       if (item.poster) video.poster = item.poster;
 
-      // Source (set type if you know it; this is optional)
+      // Source (set type if you know it; I'm just being safe)
       const source = document.createElement('source');
       source.src = item.src;
       // source.type = 'video/mp4';   // just to be safe of the codec/type
@@ -190,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.style.display = 'flex';
     document.body.classList.add('lightbox-open');
     overlay.focus();
-    // Optional: force viewport to top (belt-and-suspenders)
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   }
 
@@ -235,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// === TAG FILTERS (bar buttons + per-card tags) ===
+// === TAG FILTERS (bar buttons + card tags) ===
 document.addEventListener("DOMContentLoaded", () => {
   // Top filter buttons (next to "Show All")
   const barTags = document.querySelectorAll(".tag-filter-container .tag"); // 2D, 3D
@@ -281,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     if (!matched) {
       // If somehow the bar doesn’t have this tag, just leave none highlighted.
-      // (Not expected here since we have 2D & 3D.)
+      // (Not expected here since we have 2D & 3D, but just in case)
     }
 
     // show/hide cards
@@ -320,8 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
     li.addEventListener("click", (e) => {
       e.stopPropagation(); // don’t bubble into figure/img clicks
       applyFilter(norm(li.textContent));
-      // Optional: scroll back to the top filters so users see the highlight
-      // document.querySelector(".tag-filter-container")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     li.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
