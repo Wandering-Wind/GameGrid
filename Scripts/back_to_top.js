@@ -1,13 +1,14 @@
+//For some reason, this just sticks to the footer, it's supposed to hover as the user scrolls down
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("toTopBtn");
   if (!btn) return;
 
-  // --- make sure it's a direct child of <body>
+  //making sure it's a direct child of <body>
   if (btn.parentElement !== document.body) {
     document.body.appendChild(btn);
   }
 
-  // --- force fixed positioning so transforms can’t trap it
+  // trying to force fixed positioning so transforms can’t trap it
   btn.style.position = "fixed";
   btn.style.right = btn.style.right || "20px";
   btn.style.bottom = btn.style.bottom || "20px";
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // show as soon as user scrolls down even a little
   const update = () => {
     const scrolled = (document.scrollingElement?.scrollTop ?? window.scrollY ?? 0);
-    btn.style.display = scrolled > 0 ? "grid" : "none"; // "grid" matches your centering CSS
+    btn.style.display = scrolled > 0 ? "grid" : "none";
   };
   update();
   window.addEventListener("scroll", update, { passive: true });
