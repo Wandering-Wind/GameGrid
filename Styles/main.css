@@ -534,3 +534,61 @@ footer p:last-child {
 
 /* Optional: a tiny hover lift that layers nicely with the float */
 .project-card:hover { transform: translateY(-2px) scale(1.015); }
+
+/* --- Title FX base layout --- */
+/* Center the title block */
+h1.p-name {
+  text-align: center;            /* center text inside h1 */
+  margin-inline: auto;
+}
+
+/* The wrapper auto-centers around the text width */
+.gg-title-wrap {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 0.75rem auto 0.25rem;  /* center horizontally */
+}
+
+/* Type line + characters (unchanged semantics) */
+/* Center title text */
+h1.p-name { text-align: center; margin-inline: auto; }
+
+/* Wrapper centers the whole cluster */
+.gg-title-wrap { position: relative; display: block; width: fit-content; margin: 0.75rem auto 0.25rem; }
+
+/* Characters for typewriter */
+.gg-title-line { display: inline-block; white-space: pre-wrap; }
+.gg-char { display: inline-block; will-change: transform, opacity, filter; }
+
+/* Caret */
+.gg-caret {
+  display: inline-block;
+  width: 0.55ch;
+  margin-left: 2px;
+  border-left: 3px solid var(--neon-cyan, #00eaff);
+  filter: drop-shadow(0 0 5px var(--neon-cyan, #00eaff)) drop-shadow(0 0 12px rgba(0, 234, 255, 0.6));
+  opacity: 0.9;
+  animation: ggBlink 1s steps(1,end) infinite;
+}
+@keyframes ggBlink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+/* Underline: JS sets the width; we just keep it centered */
+.gg-title-underline { height: 18px; display: block; margin: -40px auto 0; overflow: visible; }
+
+.gg-underline-path {
+  stroke-width: 2.8;
+  filter:
+    drop-shadow(0 0 6px rgba(0, 234, 255, 0.95))
+    drop-shadow(0 0 18px rgba(0, 255, 157, 0.55))
+    drop-shadow(0 0 28px rgba(221, 0, 255, 0.35));
+}
+
+.gg-underline-orb {
+  fill: var(--neon-magenta, #dd00ff);
+  filter:
+    drop-shadow(0 0 6px rgba(221, 0, 255, 0.9))
+    drop-shadow(0 0 16px rgba(221, 0, 255, 0.65))
+    drop-shadow(0 0 28px rgba(0, 234, 255, 0.45));
+  opacity: 0;
+}
