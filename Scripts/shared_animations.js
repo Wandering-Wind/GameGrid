@@ -1,5 +1,5 @@
 //Shared GSAPs for games.html, art.html, creators.html
-// Slide-in intro for project cards + ambient hover drift
+// Trying a slide-in intro for project cards + ambient hover drift
 // Works on any page that has .project-card elements.
 
 (() => {
