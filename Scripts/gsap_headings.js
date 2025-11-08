@@ -1,4 +1,4 @@
-// Typewriter + neon underline with an orb riding the line.
+// Neon underline with an orb riding the line.
 // Works on the first <h1 class="p-name"> it finds on the page.
 
 (() => {
@@ -27,7 +27,7 @@
     });
     heading.appendChild(line);
 
-    // caret
+    // caret tings, we be fancy
     const caret = document.createElement("span");
     caret.className = "gg-caret";
     caret.setAttribute("aria-hidden", "true");
@@ -109,7 +109,7 @@
     wrap.appendChild(svg);
 
 
-   // --- center & size underline based on real h1 width ---
+   // Centerering & size underline based on real h1 width
     function sizeUnderline() {
     // width after fonts/wrapping/layout
     const w = Math.max(heading.offsetWidth, heading.getBoundingClientRect().width, 0);
@@ -130,7 +130,7 @@
     document.fonts.ready.then(sizeUnderline).catch(()=>{});
     }
 
-    // throttle helper to avoid jank on rapid resizes
+    // throttle helper to avoid jankyness on rapid resizes
     let pending = false;
     const ask = () => {
     if (pending) return;
@@ -142,7 +142,7 @@
 window.addEventListener("resize", ask);
 window.addEventListener("orientationchange", ask);
 
-// observe layout width changes on the heading/wrapper (wrapping, CSS changes, nav injection, etc.)
+// observe layout width changes on the heading/wrapper
 const ro = new ResizeObserver(ask);
 ro.observe(heading);
 ro.observe(wrap);
@@ -160,7 +160,7 @@ ro.observe(wrap);
       return;
     }
 
-    // Looping timeline: draw -> orb ride -> pulse -> fade/reset -> repeat
+    // Looping timeline
     const tl = gsap.timeline({
       defaults: { ease: "power2.out" },
       repeat: -1,
